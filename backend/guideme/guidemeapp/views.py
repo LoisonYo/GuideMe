@@ -9,6 +9,6 @@ def test(request):
     return HttpResponse("Backend OK")
 
 class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.object.all().order_by('-date_joined')
+    queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]

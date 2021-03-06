@@ -25,6 +25,9 @@ cd ./backend
 python -m venv .venv
 source .venv/Scripts/activate
 pip install Django
+pip install djangorestframework
+pip install markdown
+pip install django-filter
 ```
 
 ## Utilisation
