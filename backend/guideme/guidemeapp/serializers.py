@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from guidemeapp.models import Activity, Type, Rating
 from rest_framework import serializers
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -6,19 +7,17 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ['url', 'username', 'email', 'groups']
 
-"""
-class ActivitySerializer(serializers.HyperLinkedModelSerializer):
+class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Activity
-       field = ['url', 'creator', 'name', 'description', 'image', 'longitude', 'latitude']
+        fields = ['url', 'creator', 'name', 'description', 'image', 'longitude', 'latitude']
 
-class TypeSerializer(serializers.HyperLinkedModelSerializer):
+class TypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Type
-        field = ['url', 'name']
+        fields = ['url', 'name']
 
-class RatingSerializer(serializers.HyperLinkedModelSerializer):
+class RatingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Rating
-        field = ['url', 'note', 'comment']
-"""
+        fields = ['url', 'note', 'comment']
