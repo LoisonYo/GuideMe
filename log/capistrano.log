@@ -1,0 +1,210 @@
+# Logfile created on 2021-03-12 09:19:40 +0100 by logger.rb/v1.4.2
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-03-12 09:19:40 +0100 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [0a6dd37f] Running /usr/bin/env mkdir -p /tmp as poweruser@https
+ DEBUG [0a6dd37f] Command: /usr/bin/env mkdir -p /tmp
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-03-12 09:25:37 +0100 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [c5438055] Running /usr/bin/env mkdir -p /tmp as poweruser@https
+ DEBUG [c5438055] Command: /usr/bin/env mkdir -p /tmp
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-03-12 09:26:30 +0100 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [967ce305] Running /usr/bin/env mkdir -p /tmp as poweruser@guideme.srvz-webapp.he-arc.ch
+ DEBUG [967ce305] Command: /usr/bin/env mkdir -p /tmp
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-03-12 09:28:55 +0100 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [fe244cf1] Running /usr/bin/env mkdir -p /tmp as poweruser@guideme.srvz-webapp.he-arc.ch/
+ DEBUG [fe244cf1] Command: /usr/bin/env mkdir -p /tmp
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-03-12 09:30:16 +0100 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [b6bd9359] Running /usr/bin/env mkdir -p /tmp as poweruser@guideme.srvz-webapp.he-arc.ch/
+ DEBUG [b6bd9359] Command: /usr/bin/env mkdir -p /tmp
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-03-12 09:31:31 +0100 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [71d57297] Running /usr/bin/env mkdir -p /tmp as poweruser@srvz-webapp.he-arc.ch/
+ DEBUG [71d57297] Command: /usr/bin/env mkdir -p /tmp
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-03-12 09:34:23 +0100 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [b0ebf91e] Running /usr/bin/env mkdir -p /tmp as poweruser@srvz-webapp.he-arc.ch/
+ DEBUG [b0ebf91e] Command: /usr/bin/env mkdir -p /tmp
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-03-12 09:40:53 +0100 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [c217964e] Running /usr/bin/env mkdir -p /tmp as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [c217964e] Command: /usr/bin/env mkdir -p /tmp
+  INFO [c217964e] Finished in 0.393 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-2e9ffc0659cfc9f43f45.sh 0.0%
+  INFO Uploading /tmp/git-ssh-2e9ffc0659cfc9f43f45.sh 100.0%
+  INFO [d8a1fe17] Running /usr/bin/env chmod 700 /tmp/git-ssh-2e9ffc0659cfc9f43f45.sh as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [d8a1fe17] Command: /usr/bin/env chmod 700 /tmp/git-ssh-2e9ffc0659cfc9f43f45.sh
+  INFO [d8a1fe17] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [d5d40e2e] Running /usr/bin/env git ls-remote git@github.com:HE-Arc/GuideMe.git HEAD as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [d5d40e2e] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2e9ffc0659cfc9f43f45.sh" ; /usr/bin/env git ls-remote git@github.com:HE-Arc/GuideMe.git HEAD )
+ DEBUG [d5d40e2e] 	Warning: Permanently added 'github.com,140.82.121.4' (RSA) to the list of known hosts.
+ DEBUG [d5d40e2e] 	4ffd52256fab59c8eb9ded5a538b02366555c846	HEAD
+  INFO [d5d40e2e] Finished in 1.407 seconds with exit status 0 (successful).
+  INFO [7dd2a17a] Running /usr/bin/env mkdir -p /var/www/GuideMe/shared /var/www/GuideMe/releases as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [7dd2a17a] Command: /usr/bin/env mkdir -p /var/www/GuideMe/shared /var/www/GuideMe/releases
+  INFO [7dd2a17a] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [0be37c41] Running [ -f /var/www/GuideMe/current/REVISION ] as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [0be37c41] Command: [ -f /var/www/GuideMe/current/REVISION ]
+ DEBUG [0be37c41] Finished in 0.102 seconds with exit status 1 (failed).
+ DEBUG [21878b3a] Running [ -f /var/www/GuideMe/repo/HEAD ] as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [21878b3a] Command: [ -f /var/www/GuideMe/repo/HEAD ]
+ DEBUG [21878b3a] Finished in 0.078 seconds with exit status 1 (failed).
+ DEBUG [1ea98480] Running if test ! -d /var/www/GuideMe; then echo "Directory does not exist '/var/www/GuideMe'" 1>&2; false; fi as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [1ea98480] Command: if test ! -d /var/www/GuideMe; then echo "Directory does not exist '/var/www/GuideMe'" 1>&2; false; fi
+ DEBUG [1ea98480] Finished in 0.074 seconds with exit status 0 (successful).
+  INFO [e38b428c] Running /usr/bin/env git clone --mirror git@github.com:HE-Arc/GuideMe.git /var/www/GuideMe/repo as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [e38b428c] Command: cd /var/www/GuideMe && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2e9ffc0659cfc9f43f45.sh" ; /usr/bin/env git clone --mirror git@github.com:HE-Arc/GuideMe.git /var/www/GuideMe/repo )
+ DEBUG [e38b428c] 	Cloning into bare repository '/var/www/GuideMe/repo'...
+  INFO [e38b428c] Finished in 1.869 seconds with exit status 0 (successful).
+ DEBUG [8961f8b8] Running if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [8961f8b8] Command: if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi
+ DEBUG [8961f8b8] Finished in 0.065 seconds with exit status 0 (successful).
+  INFO [900b99e6] Running /usr/bin/env git remote set-url origin git@github.com:HE-Arc/GuideMe.git as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [900b99e6] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2e9ffc0659cfc9f43f45.sh" ; /usr/bin/env git remote set-url origin git@github.com:HE-Arc/GuideMe.git )
+  INFO [900b99e6] Finished in 0.082 seconds with exit status 0 (successful).
+  INFO [636e46a6] Running /usr/bin/env git remote update --prune as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [636e46a6] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2e9ffc0659cfc9f43f45.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [636e46a6] 	Fetching origin
+ DEBUG [636e46a6] 	Warning: Permanently added the RSA host key for IP address '140.82.121.3' to the list of known hosts.
+  INFO [636e46a6] Finished in 1.321 seconds with exit status 0 (successful).
+ DEBUG [ce95e793] Running if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [ce95e793] Command: if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi
+ DEBUG [ce95e793] Finished in 0.108 seconds with exit status 0 (successful).
+  INFO [1d9cd210] Running /usr/bin/env mkdir -p /var/www/GuideMe/releases/20210312084055 as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [1d9cd210] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2e9ffc0659cfc9f43f45.sh" ; /usr/bin/env mkdir -p /var/www/GuideMe/releases/20210312084055 )
+  INFO [1d9cd210] Finished in 0.072 seconds with exit status 0 (successful).
+  INFO [7a88bbb2] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/GuideMe/releases/20210312084055 as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [7a88bbb2] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-2e9ffc0659cfc9f43f45.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/GuideMe/releases/20210312084055 )
+ DEBUG [7a88bbb2] 	fatal: not a valid object name: master
+ DEBUG [7a88bbb2] 	tar: This does not look like a tar archive
+ DEBUG [7a88bbb2] 	tar: 
+ DEBUG [7a88bbb2] 	Exiting with failure status due to previous errors
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-03-12 09:42:35 +0100 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [f940d7b4] Running /usr/bin/env mkdir -p /tmp as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [f940d7b4] Command: /usr/bin/env mkdir -p /tmp
+  INFO [f940d7b4] Finished in 0.471 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-0a24e5e857f48f9747a9.sh 0.0%
+  INFO Uploading /tmp/git-ssh-0a24e5e857f48f9747a9.sh 100.0%
+  INFO [61c5ea50] Running /usr/bin/env chmod 700 /tmp/git-ssh-0a24e5e857f48f9747a9.sh as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [61c5ea50] Command: /usr/bin/env chmod 700 /tmp/git-ssh-0a24e5e857f48f9747a9.sh
+  INFO [61c5ea50] Finished in 0.076 seconds with exit status 0 (successful).
+  INFO [3882a2d9] Running /usr/bin/env git ls-remote git@github.com:HE-Arc/GuideMe.git HEAD as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [3882a2d9] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0a24e5e857f48f9747a9.sh" ; /usr/bin/env git ls-remote git@github.com:HE-Arc/GuideMe.git HEAD )
+ DEBUG [3882a2d9] 	4ffd52256fab59c8eb9ded5a538b02366555c846	HEAD
+  INFO [3882a2d9] Finished in 1.349 seconds with exit status 0 (successful).
+  INFO [e844d192] Running /usr/bin/env mkdir -p /var/www/GuideMe/shared /var/www/GuideMe/releases as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [e844d192] Command: /usr/bin/env mkdir -p /var/www/GuideMe/shared /var/www/GuideMe/releases
+  INFO [e844d192] Finished in 0.099 seconds with exit status 0 (successful).
+ DEBUG [7e852b23] Running [ -f /var/www/GuideMe/current/REVISION ] as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [7e852b23] Command: [ -f /var/www/GuideMe/current/REVISION ]
+ DEBUG [7e852b23] Finished in 0.069 seconds with exit status 1 (failed).
+ DEBUG [9105e0c9] Running [ -f /var/www/GuideMe/repo/HEAD ] as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [9105e0c9] Command: [ -f /var/www/GuideMe/repo/HEAD ]
+ DEBUG [9105e0c9] Finished in 0.071 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/GuideMe/repo
+ DEBUG [d6e45bb6] Running if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [d6e45bb6] Command: if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi
+ DEBUG [d6e45bb6] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [c37ee0c3] Running /usr/bin/env git remote set-url origin git@github.com:HE-Arc/GuideMe.git as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [c37ee0c3] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0a24e5e857f48f9747a9.sh" ; /usr/bin/env git remote set-url origin git@github.com:HE-Arc/GuideMe.git )
+  INFO [c37ee0c3] Finished in 0.087 seconds with exit status 0 (successful).
+  INFO [4067c741] Running /usr/bin/env git remote update --prune as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [4067c741] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0a24e5e857f48f9747a9.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [4067c741] 	Fetching origin
+  INFO [4067c741] Finished in 1.380 seconds with exit status 0 (successful).
+ DEBUG [1eca9dee] Running if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [1eca9dee] Command: if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi
+ DEBUG [1eca9dee] Finished in 0.070 seconds with exit status 0 (successful).
+  INFO [2944ca4b] Running /usr/bin/env mkdir -p /var/www/GuideMe/releases/20210312084237 as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [2944ca4b] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0a24e5e857f48f9747a9.sh" ; /usr/bin/env mkdir -p /var/www/GuideMe/releases/20210312084237 )
+  INFO [2944ca4b] Finished in 0.123 seconds with exit status 0 (successful).
+  INFO [eeeca9f9] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/GuideMe/releases/20210312084237 as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [eeeca9f9] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-0a24e5e857f48f9747a9.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /var/www/GuideMe/releases/20210312084237 )
+ DEBUG [eeeca9f9] 	fatal: not a valid object name: master
+ DEBUG [eeeca9f9] 	tar: This does not look like a tar archive
+ DEBUG [eeeca9f9] 	tar: Exiting with failure status due to previous errors
+  INFO ---------------------------------------------------------------------------
+  INFO START 2021-03-12 09:46:11 +0100 cap production deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [9d9bc960] Running /usr/bin/env mkdir -p /tmp as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [9d9bc960] Command: /usr/bin/env mkdir -p /tmp
+  INFO [9d9bc960] Finished in 0.585 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-b0f2b4eca4d2b3c7f0e7.sh 0.0%
+  INFO Uploading /tmp/git-ssh-b0f2b4eca4d2b3c7f0e7.sh 100.0%
+  INFO [acdbb873] Running /usr/bin/env chmod 700 /tmp/git-ssh-b0f2b4eca4d2b3c7f0e7.sh as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [acdbb873] Command: /usr/bin/env chmod 700 /tmp/git-ssh-b0f2b4eca4d2b3c7f0e7.sh
+  INFO [acdbb873] Finished in 0.082 seconds with exit status 0 (successful).
+  INFO [a4bb7121] Running /usr/bin/env git ls-remote git@github.com:HE-Arc/GuideMe.git HEAD as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [a4bb7121] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-b0f2b4eca4d2b3c7f0e7.sh" ; /usr/bin/env git ls-remote git@github.com:HE-Arc/GuideMe.git HEAD )
+ DEBUG [a4bb7121] 	4ffd52256fab59c8eb9ded5a538b02366555c846	HEAD
+  INFO [a4bb7121] Finished in 1.351 seconds with exit status 0 (successful).
+  INFO [9dbc85d0] Running /usr/bin/env mkdir -p /var/www/GuideMe/shared /var/www/GuideMe/releases as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [9dbc85d0] Command: /usr/bin/env mkdir -p /var/www/GuideMe/shared /var/www/GuideMe/releases
+  INFO [9dbc85d0] Finished in 0.133 seconds with exit status 0 (successful).
+ DEBUG [1d536353] Running [ -f /var/www/GuideMe/current/REVISION ] as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [1d536353] Command: [ -f /var/www/GuideMe/current/REVISION ]
+ DEBUG [1d536353] Finished in 0.148 seconds with exit status 1 (failed).
+ DEBUG [351b4523] Running [ -f /var/www/GuideMe/repo/HEAD ] as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [351b4523] Command: [ -f /var/www/GuideMe/repo/HEAD ]
+ DEBUG [351b4523] Finished in 0.119 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /var/www/GuideMe/repo
+ DEBUG [f66056fe] Running if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [f66056fe] Command: if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi
+ DEBUG [f66056fe] Finished in 0.126 seconds with exit status 0 (successful).
+  INFO [211552a8] Running /usr/bin/env git remote set-url origin git@github.com:HE-Arc/GuideMe.git as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [211552a8] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-b0f2b4eca4d2b3c7f0e7.sh" ; /usr/bin/env git remote set-url origin git@github.com:HE-Arc/GuideMe.git )
+  INFO [211552a8] Finished in 0.110 seconds with exit status 0 (successful).
+  INFO [7dbf807e] Running /usr/bin/env git remote update --prune as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [7dbf807e] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-b0f2b4eca4d2b3c7f0e7.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [7dbf807e] 	Fetching origin
+  INFO [7dbf807e] Finished in 1.452 seconds with exit status 0 (successful).
+ DEBUG [db6b9f44] Running if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [db6b9f44] Command: if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi
+ DEBUG [db6b9f44] Finished in 0.079 seconds with exit status 0 (successful).
+  INFO [e532b7f3] Running /usr/bin/env mkdir -p /var/www/GuideMe/releases/20210312084619 as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [e532b7f3] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-b0f2b4eca4d2b3c7f0e7.sh" ; /usr/bin/env mkdir -p /var/www/GuideMe/releases/20210312084619 )
+  INFO [e532b7f3] Finished in 0.081 seconds with exit status 0 (successful).
+  INFO [0e3f9c1f] Running /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/GuideMe/releases/20210312084619 as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [0e3f9c1f] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-b0f2b4eca4d2b3c7f0e7.sh" ; /usr/bin/env git archive main | /usr/bin/env tar -x -f - -C /var/www/GuideMe/releases/20210312084619 )
+  INFO [0e3f9c1f] Finished in 0.147 seconds with exit status 0 (successful).
+ DEBUG [ddfbbda3] Running if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [ddfbbda3] Command: if test ! -d /var/www/GuideMe/repo; then echo "Directory does not exist '/var/www/GuideMe/repo'" 1>&2; false; fi
+ DEBUG [ddfbbda3] Finished in 0.070 seconds with exit status 0 (successful).
+ DEBUG [7cfe1a61] Running /usr/bin/env git rev-list --max-count=1 main as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [7cfe1a61] Command: cd /var/www/GuideMe/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-b0f2b4eca4d2b3c7f0e7.sh" ; /usr/bin/env git rev-list --max-count=1 main )
+ DEBUG [7cfe1a61] 	4ffd52256fab59c8eb9ded5a538b02366555c846
+ DEBUG [7cfe1a61] Finished in 0.081 seconds with exit status 0 (successful).
+ DEBUG [4784447e] Running if test ! -d /var/www/GuideMe/releases/20210312084619; then echo "Directory does not exist '/var/www/GuideMe/releases/20210312084619'" 1>&2; false; fi as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [4784447e] Command: if test ! -d /var/www/GuideMe/releases/20210312084619; then echo "Directory does not exist '/var/www/GuideMe/releases/20210312084619'" 1>&2; false; fi
+ DEBUG [4784447e] Finished in 0.070 seconds with exit status 0 (successful).
+  INFO [eb5dc195] Running /usr/bin/env echo "4ffd52256fab59c8eb9ded5a538b02366555c846" > REVISION as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [eb5dc195] Command: cd /var/www/GuideMe/releases/20210312084619 && /usr/bin/env echo "4ffd52256fab59c8eb9ded5a538b02366555c846" > REVISION
+  INFO [eb5dc195] Finished in 0.089 seconds with exit status 0 (successful).
+  INFO [1f4d3f37] Running /usr/bin/env ln -s /var/www/GuideMe/releases/20210312084619 /var/www/GuideMe/releases/current as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [1f4d3f37] Command: /usr/bin/env ln -s /var/www/GuideMe/releases/20210312084619 /var/www/GuideMe/releases/current
+  INFO [1f4d3f37] Finished in 0.082 seconds with exit status 0 (successful).
+  INFO [43936b28] Running /usr/bin/env mv /var/www/GuideMe/releases/current /var/www/GuideMe as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [43936b28] Command: /usr/bin/env mv /var/www/GuideMe/releases/current /var/www/GuideMe
+  INFO [43936b28] Finished in 0.089 seconds with exit status 0 (successful).
+ DEBUG [9a8eb2a2] Running /usr/bin/env ls -x /var/www/GuideMe/releases as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [9a8eb2a2] Command: /usr/bin/env ls -x /var/www/GuideMe/releases
+ DEBUG [9a8eb2a2] 	20210312084055	20210312084237	20210312084619
+ DEBUG [9a8eb2a2] Finished in 0.093 seconds with exit status 0 (successful).
+ DEBUG [eda65dab] Running if test ! -d /var/www/GuideMe/releases; then echo "Directory does not exist '/var/www/GuideMe/releases'" 1>&2; false; fi as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [eda65dab] Command: if test ! -d /var/www/GuideMe/releases; then echo "Directory does not exist '/var/www/GuideMe/releases'" 1>&2; false; fi
+ DEBUG [eda65dab] Finished in 0.081 seconds with exit status 0 (successful).
+  INFO [c42cbbb7] Running /usr/bin/env echo "Branch main (at 4ffd52256fab59c8eb9ded5a538b02366555c846) deployed as release 20210312084619 by rezerem" >> /var/www/GuideMe/revisions.log as poweruser@srvz-webapp.he-arc.ch
+ DEBUG [c42cbbb7] Command: cd /var/www/GuideMe/releases && /usr/bin/env echo "Branch main (at 4ffd52256fab59c8eb9ded5a538b02366555c846) deployed as release 20210312084619 by rezerem" >> /var/www/GuideMe/revisions.log
+  INFO [c42cbbb7] Finished in 0.086 seconds with exit status 0 (successful).
