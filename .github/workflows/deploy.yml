@@ -33,10 +33,10 @@ jobs:
       - name: install ssh key
         uses: webfactory/ssh-agent@v0.5.1
         with:
-          ssh-private-key: $({ secrets.SERVER_KEY })
+          ssh-private-key: ${{ secrets.SERVER_KEY }}
       - name: Add known host
         run: |
-          ssh-keyscan -p $({ secrets.DEPLOY_HOST_SSH_PORT }) $({ secrets.DEPLOY_HOST }) >> ~/.ssh/known_hosts
+          ssh-keyscan -p ${{ secrets.DEPLOY_HOST_SSH_PORT }} ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
       - name: Deploy
         run: |
           bundle exec cap production deploy
