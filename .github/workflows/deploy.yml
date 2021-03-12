@@ -27,6 +27,7 @@ jobs:
       - name: Set up Ruby 2.7.x
         uses: ruby/setup-ruby@v1
         with:
+          ruby-version: '2.7'
           bundler-cache: true
       - name: install ssh key
         uses: webfactory/ssh-agent@v0.5.1
