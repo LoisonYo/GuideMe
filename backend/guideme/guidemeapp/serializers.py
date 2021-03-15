@@ -6,11 +6,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         model = User
         fields = ['url', 'username', 'email', 'groups']
 
-"""
-class ActivitySerializer(serializers.HyperLinkedModelSerializer):
+class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Activity
-       field = ['url', 'creator', 'name', 'description', 'image', 'longitude', 'latitude']
+        field = ['url', 'creator', 'name', 'description', 'image', 'longitude', 'latitude']
 
 class TypeSerializer(serializers.HyperLinkedModelSerializer):
     class Meta:
@@ -21,4 +20,3 @@ class RatingSerializer(serializers.HyperLinkedModelSerializer):
     class Meta:
         model = Rating
         field = ['url', 'note', 'comment']
-"""

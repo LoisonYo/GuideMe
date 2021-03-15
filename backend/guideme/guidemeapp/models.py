@@ -23,4 +23,3 @@ class Rating(models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE, default=None)
     note = models.IntegerField()
     comment = models.TextField()
-
