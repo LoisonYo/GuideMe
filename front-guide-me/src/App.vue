@@ -2,7 +2,7 @@
 	<v-app>
 		<TheHeader/>
 		<v-main>
-			<v-container fluid>
+			<v-container fluid class="pa-0">
 				<router-view></router-view>
 			</v-container>
 		</v-main>
@@ -22,3 +22,9 @@ export default {
 	}),
 };
 </script>
+
+<style scoped>
+#app {
+	background-color: transparent;
+}
+</style>

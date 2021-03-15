@@ -1,12 +1,12 @@
 <template>
 	<nav>
-		<v-app-bar app color="transparent" flat style="z-index: 10;">
-			<v-app-bar-nav-icon  class="mx-0" v-on:click="drawer = !drawer">
+		<v-app-bar app  color="transparent" flat style="z-index: 10;">
+			<v-app-bar-nav-icon class="mx-0" v-on:click="drawer = !drawer">
 				<input type="checkbox" id="openmenu-input" v-model="drawer">
 				<label id="hamburger-lbl" for="openmenu-input">
-					<span></span>
-					<span></span>
-					<span></span>
+					<span v-for="i in 3" :key="i" 
+					:style="{ background: colorNavIcon }"
+					v-bind:class="[{ 'secondary': drawer }]"></span>
 				</label>
 			</v-app-bar-nav-icon>
 
@@ -15,17 +15,17 @@
 			<ButtonToggleTheme />
 		</v-app-bar>
 
-		<v-navigation-drawer fixed temporary :width="navWidth" class="pt-16" v-model="drawer">
-			<v-list nav dense>
-				<router-link v-for="(item, i) in items" :key="i" :to=" { name: item.route } " style="text-decoration: none; ">
-					<v-list-item link>
+		<v-navigation-drawer fixed temporary :width="navWidth" class="pt-16" color="primary" v-model="drawer">
+			<v-list nav dense> 
+				<router-link v-for="(item, i) in items" :key="i" :to=" { name: item.route } " style="text-decoration: none;">
+					<v-list-item link >
 					
-						<v-list-item-icon>
-							<v-icon v-text="item.icon" class="ml-3"></v-icon>
+						<v-list-item-icon >
+							<v-icon v-text="item.icon" class="ml-3" color="secondary"></v-icon>
 						</v-list-item-icon>
 						
-						<v-list-item-content>
-							<v-list-item-title v-text="item.text"></v-list-item-title>
+						<v-list-item-content >
+							<v-list-item-title v-text="item.text" class="secondary--text"></v-list-item-title>
 						</v-list-item-content>
 					
 					</v-list-item>
@@ -37,6 +37,7 @@
 
 <script>
 import ButtonToggleTheme from './ButtonToggleTheme.vue'
+import colors from 'vuetify/lib/util/colors'
 
 export default {
 	name: "TheHeader",
@@ -45,6 +46,7 @@ export default {
 	},
 	data() {
 		return {
+			colorNavIcon: colors.grey.lighten4,
 			drawer: false,
 			items: [
 				{ text: 'Home', icon: 'mdi-home', route: 'Home'},
@@ -87,9 +89,7 @@ export default {
 		margin: 7px 0;
 		transform-origin: 50% 50%;
 		transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
-			background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.5s ease;
-		/* Color */
-		background: white;
+			background 0.5s cubic-bezier(0.77, 0.2, 0.05, 1), opacity 0.5s ease;		
 	}
 }
 
