@@ -3,11 +3,19 @@ import Vuex from "vuex";
 import axios from 'axios'
 
 Vue.use(Vuex);
-axios.defaults.baseURL = ""; // Link to backend
+axios.defaults.baseURL = "http://localhost:8000";
 
 export default new Vuex.Store({
-	state: {},
-	mutations: {},
+	state:
+	{
+		activities: [],
+	},
+
+	mutations:
+	{
+		
+	},
+
 	actions: {},
-	modules: {}
+	modules: {},
 });
