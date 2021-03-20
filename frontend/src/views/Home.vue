@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div style="width:100%;">
 		<TheBackground/>
 		
 		<v-sheet height="100vh" color="transparent" 
@@ -18,22 +18,27 @@
 			</router-link>
 		</v-sheet>
 
-		<v-sheet class="primary secondary--text pa-5
+		<v-sheet class="primary secondary--text pa-10 rounded-t-xl
 			d-flex flex-column align-center">
-			<div class="">
-			<h2 class="headline font-weight-regular mb-5" style="text-align: center;">Vous souhaitez ajouter une activité?</h2>
-			
-				<p style="text-align: center;">Connectez-vous et ajoutez une activité dans l'application.</p>
-				<img :src="imgMap.src" :alt="imgMap.alt">
-				<v-btn outlined rounded color="accent">Ajouter une activité</v-btn>
-			</div>
-			
-<div>
-			<h2 class="headline font-weight-regular" style="text-align: center;">A propos de Guide Me</h2>
 
-			<p>Guide Me est une application qui vous permet de trouver des activités à faire dans une région.</p>
-			<p>C'est une application communautaire, nous comptons donc sur vous pour la rendre géniale!</p>
-</div>
+			<h2 style="font-size: 2rem;" class="font-weight-regular my-4 text-center">
+				Vous souhaitez ajouter une activité?
+			</h2>
+			<p class="text-center">Connectez-vous et ajoutez une activité dans l'application.</p>
+			<img :src="imgMap.src" :alt="imgMap.alt" width="130px" class="my-7">
+			<v-btn rounded color="accent" elevation="0">Ajouter une activité</v-btn>
+			
+			<div style="width: 100%;" class="mb-5 mt-12">
+				<v-divider class="secondary"></v-divider>
+			</div>
+
+			<h2 style="font-size: 2rem;" class="font-weight-regular my-4 text-center">
+				A propos de Guide Me
+			</h2>
+
+			<p class="text-justify">Guide Me est une application qui vous permet de trouver des activités à faire dans une région.</p>
+			<p class="text-justify mb-5">C'est une application communautaire, nous comptons donc sur vous pour la rendre géniale!</p>
+
 		</v-sheet>	
 	</div>
 </template>
@@ -60,10 +65,6 @@ export default {
 </script>
 
 <style scoped>
-
-img {
-	width:100px;
-}
 
 p {
 	margin:0;

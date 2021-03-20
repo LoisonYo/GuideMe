@@ -2,7 +2,7 @@
 	<v-app>
 		<TheHeader/>
 		<v-main>
-			<v-container fluid class="pa-0">
+			<v-container fluid fill-height class="pa-0">
 				<router-view></router-view>
 			</v-container>
 		</v-main>
