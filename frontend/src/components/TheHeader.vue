@@ -30,7 +30,27 @@
 					
 					</v-list-item>
 				</router-link>
-			</v-list>
+			</v-list>				
+			
+			<template v-slot:append>
+				<v-divider class="mx-2"></v-divider>
+				<div class="pa-2">
+					<div v-if="loggedIn">
+						<h4 class="body-1 text-center">{{user.name}}</h4>
+						<h5 class="caption text-center mb-3">{{user.email}}</h5>
+						<v-btn @click="logout" block color="primary lighten-2" class="caption">
+							Se déconnecter
+						</v-btn>
+					</div>
+					<div v-else>
+						<router-link :to="{ name: 'Login' }">
+							<v-btn block color="primary lighten-2" class="caption">
+								Se connecter
+							</v-btn>
+						</router-link>
+					</div>
+				</div>
+			</template>
 		</v-navigation-drawer>
 	</nav>
 </template>
@@ -46,6 +66,10 @@ export default {
 	},
 	data() {
 		return {
+			user: {
+				name: "Pingoo",
+				email: "jean.neymar@gmail.com",
+			},
 			colorNavIcon: colors.grey.lighten4,
 			drawer: false,
 			items: [
@@ -55,6 +79,9 @@ export default {
 		}
 	},
 	computed: {
+		loggedIn() {
+			return true;
+		},
 		navWidth () {
 			switch (this.$vuetify.breakpoint.name) {
 				case 'xs': return 220
@@ -66,6 +93,11 @@ export default {
 			}
 		},
 	},
+	methods: {
+		logout() {
+			// TODO
+		},
+	}
 }
 </script>
 
