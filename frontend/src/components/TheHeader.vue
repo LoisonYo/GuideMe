@@ -18,13 +18,13 @@
 		<v-navigation-drawer fixed temporary :width="navWidth" class="pt-16" color="primary" v-model="drawer">
 			<v-list nav dense> 
 				<router-link v-for="(item, i) in items" :key="i" :to=" { name: item.route } " style="text-decoration: none;">
-					<v-list-item link >
+					<v-list-item link>
 					
 						<v-list-item-icon >
 							<v-icon v-text="item.icon" class="ml-3" color="secondary"></v-icon>
 						</v-list-item-icon>
 						
-						<v-list-item-content >
+						<v-list-item-content>
 							<v-list-item-title v-text="item.text" class="secondary--text"></v-list-item-title>
 						</v-list-item-content>
 					
@@ -49,8 +49,8 @@ export default {
 			colorNavIcon: colors.grey.lighten4,
 			drawer: false,
 			items: [
-				{ text: 'Home', icon: 'mdi-home', route: 'Home'},
-				{ text: 'Search', icon: 'mdi-magnify', route: 'Search'},
+				{ text: 'Accueil', icon: 'mdi-home', route: 'Home'},
+				{ text: 'Rechercher', icon: 'mdi-magnify', route: 'Search'},
 			],
 		}
 	},
