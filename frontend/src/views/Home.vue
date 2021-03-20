@@ -27,7 +27,7 @@
 			<p class="text-center">Connectez-vous et ajoutez une activité dans l'application.</p>
 			<img :src="imgMap.src" :alt="imgMap.alt" width="130px" class="my-7">
 
-			<router-link :to="{ name: 'ActivityCreate' }">
+			<router-link :to="{ name: 'ActivityCreate' }" class="mt-3">
 				<v-btn rounded color="accent" elevation="0">Ajouter une activité</v-btn>
 			</router-link>
 
@@ -39,8 +39,8 @@
 				A propos de Guide Me
 			</h2>
 
-			<p class="text-justify">Guide Me est une application qui vous permet de trouver des activités à faire dans une région.</p>
-			<p class="text-justify mb-5">C'est une application communautaire, nous comptons donc sur vous pour la rendre géniale!</p>
+			<p class="text-center mb-2">Guide Me est une application qui vous permet de trouver des activités à faire dans une région.</p>
+			<p class="text-center mb-10">C'est une application communautaire, nous comptons donc sur vous pour la rendre géniale!</p>
 
 		</v-sheet>	
 	</div>

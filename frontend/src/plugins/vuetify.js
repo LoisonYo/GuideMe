@@ -17,17 +17,18 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
 	theme: {
+		dark: true,
 		themes: {
 			light: {
-				primary: colors.blue.lighten3,
-				secondary: colors.orange.darken4,
-				accent: colors.green.base,
+				primary: colors.grey.lighten4,
+				secondary: colors.grey.darken3,
+				accent: "#7B87D1",
 				background: colors.grey.lighten4,
 			},
 			dark: {
-				primary: colors.purple.darken4,
-				secondary: colors.green.lighten1,
-				background: colors.grey.darken4,
+				primary: "#242832",
+				secondary: colors.grey.lighten2,
+				accent: "#7B87D1",
 			},
 		},
 	},

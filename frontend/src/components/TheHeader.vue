@@ -1,6 +1,6 @@
 <template>
 	<nav>
-		<v-app-bar app  color="transparent" flat style="z-index: 10;">
+		<v-app-bar app absolute color="transparent" flat style="z-index: 10;">
 			<v-app-bar-nav-icon class="mx-0" v-on:click="drawer = !drawer">
 				<input type="checkbox" id="openmenu-input" v-model="drawer">
 				<label id="hamburger-lbl" for="openmenu-input">
