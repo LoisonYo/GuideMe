@@ -26,8 +26,11 @@
 			</h2>
 			<p class="text-center">Connectez-vous et ajoutez une activité dans l'application.</p>
 			<img :src="imgMap.src" :alt="imgMap.alt" width="130px" class="my-7">
-			<v-btn rounded color="accent" elevation="0">Ajouter une activité</v-btn>
-			
+
+			<router-link :to="{ name: 'ActivityCreate' }">
+				<v-btn rounded color="accent" elevation="0">Ajouter une activité</v-btn>
+			</router-link>
+
 			<div style="width: 100%;" class="mb-5 mt-12">
 				<v-divider class="secondary"></v-divider>
 			</div>
