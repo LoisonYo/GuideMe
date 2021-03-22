@@ -1,24 +1,46 @@
 <template>
-	<div>
-		<img :src="img.src" :alt="img.alt">
+	<div style="width:100%;">
+		<TheBackground/>
 		
-		<v-sheet height="100vh" color="transparent" class="pt-14 pt-md-16 mt-n14 mt-md-n16 grey--text text--lighten-4" >
-			<h1 class="display-3 font-weight-regular">Guide Me</h1>
-			<p>Recherche une activity dans une région</p>
-			<router-link :to="{ name: 'Search' }" style="text-decoration: none;">
-				<v-btn outlined rounded color="grey lighten-4">Rechercher</v-btn>
+		<v-sheet height="100vh" color="transparent" 
+			style="overflow: hidden;"
+			class="grey--text text--lighten-4
+			pt-14 pt-md-16 mt-n14 mt-md-n16 
+			d-flex flex-column align-center justify-space-between">
+
+			<div style="margin-top: 5vh; text-align: center;">
+				<h1 style="font-size: 4rem;" class="font-weight-regular">Guide Me</h1>
+				<p style="width: 250px;" class="title ma-auto">Recherche une activity dans une région</p>
+			</div>	
+
+			<router-link :to="{ name: 'Search' }" style="margin: 15vh 0;">
+				<v-btn large outlined rounded color="grey lighten-4">Rechercher</v-btn>
 			</router-link>
 		</v-sheet>
 
-		<v-sheet class="primary secondary--text ">
-			<h2>Vous souhaitez ajouter une activité?</h2>
-			<p>Connectez-vous et ajoutez une activité dans l'application.</p>
-			<v-btn outlined rounded color="accent">Ajouter une activité</v-btn>
+		<v-sheet class="primary secondary--text pa-10 rounded-t-xl
+			d-flex flex-column align-center">
 
-			<h2>A propos de Guide Me</h2>
-			<p>Guide Me est une application qui vous permet de trouver des activités à faire dans une région.</p>
+			<h2 style="font-size: 2rem;" class="font-weight-regular my-4 text-center">
+				Vous souhaitez ajouter une activité?
+			</h2>
+			<p class="text-center">Connectez-vous et ajoutez une activité dans l'application.</p>
+			<img :src="imgMap.src" :alt="imgMap.alt" width="130px" class="my-7">
 
-			<p>C'est une application communautaire, nous comptons donc sur vous pour la rendre géniale!</p>
+			<router-link :to="{ name: 'ActivityCreate' }" class="mt-3">
+				<v-btn rounded color="accent" elevation="0">Ajouter une activité</v-btn>
+			</router-link>
+
+			<div style="width: 100%;" class="mb-5 mt-12">
+				<v-divider class="secondary"></v-divider>
+			</div>
+
+			<h2 style="font-size: 2rem;" class="font-weight-regular my-4 text-center">
+				A propos de Guide Me
+			</h2>
+
+			<p class="text-center mb-2">Guide Me est une application qui vous permet de trouver des activités à faire dans une région.</p>
+			<p class="text-center mb-10">C'est une application communautaire, nous comptons donc sur vous pour la rendre géniale!</p>
 
 		</v-sheet>	
 	</div>
@@ -26,49 +48,27 @@
 
 <script>
 // @ is an alias to /src
-//import HelloWorld from "@/components/HelloWorld.vue";
-import road from "@/assets/background/road.jpeg";
+import TheBackground from '@/components/TheBackground.vue';
+import map from "@/assets/map.png"
 
 export default {
 	name: "Home",
 	components: {
-		
+		TheBackground,
 	},
 	data() {
 		return {
-
-			img: {
-				src: road,
-				alt: "road",
+			imgMap: {
+				src: map,
+				alt: "map icon",
 			}
 		}
-	},
-	computed: {
-		
 	},
 };
 </script>
 
 <style scoped>
-
-img {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: -1;
-	width: 100%;
-	height: 100vh;
-	object-fit: cover;
-}
-
 p {
 	margin:0;
 }
-#yo {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	
-}
-
 </style>

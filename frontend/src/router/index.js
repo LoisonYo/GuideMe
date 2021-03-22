@@ -6,6 +6,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/users/Login"
 import Register from "../views/users/Register"
 import ActivityDetails from "../views/activities/ActivityDetails"
+import ActivityCreate from "../views/activities/ActivityCreate"
 import Search from "../views/activities/Search"
 
 
@@ -55,12 +56,12 @@ const routes = [
 	// 	component: TODO,
 	// 	meta:	{ requiresAuth: true }
 	// },
-	// {
-	// 	path: "/activity/create",
-	// 	name: "TODO",
-	// 	component: TODO,
-	// 	meta:	{ requiresAuth: true }
-	// },
+	{
+		path: "/activity/create",
+		name: "ActivityCreate",
+		component: ActivityCreate,
+		meta:	{ requiresAuth: true }
+	},
 	// {
 	// 	path: "/activity/edit",
 	// 	name: "TODO",

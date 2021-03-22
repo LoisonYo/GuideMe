@@ -1,6 +1,6 @@
 <template>
 	<nav>
-		<v-app-bar app  color="transparent" flat style="z-index: 10;">
+		<v-app-bar app absolute color="transparent" flat style="z-index: 10;">
 			<v-app-bar-nav-icon class="mx-0" v-on:click="drawer = !drawer">
 				<input type="checkbox" id="openmenu-input" v-model="drawer">
 				<label id="hamburger-lbl" for="openmenu-input">
@@ -18,19 +18,39 @@
 		<v-navigation-drawer fixed temporary :width="navWidth" class="pt-16" color="primary" v-model="drawer">
 			<v-list nav dense> 
 				<router-link v-for="(item, i) in items" :key="i" :to=" { name: item.route } " style="text-decoration: none;">
-					<v-list-item link >
+					<v-list-item link>
 					
 						<v-list-item-icon >
 							<v-icon v-text="item.icon" class="ml-3" color="secondary"></v-icon>
 						</v-list-item-icon>
 						
-						<v-list-item-content >
+						<v-list-item-content>
 							<v-list-item-title v-text="item.text" class="secondary--text"></v-list-item-title>
 						</v-list-item-content>
 					
 					</v-list-item>
 				</router-link>
-			</v-list>
+			</v-list>				
+			
+			<template v-slot:append>
+				<v-divider class="mx-2"></v-divider>
+				<div class="pa-2">
+					<div v-if="loggedIn">
+						<h4 class="body-1 text-center">{{user.name}}</h4>
+						<h5 class="caption text-center mb-3">{{user.email}}</h5>
+						<v-btn @click="logout" block color="primary lighten-2" class="caption">
+							Se déconnecter
+						</v-btn>
+					</div>
+					<div v-else>
+						<router-link :to="{ name: 'Login' }">
+							<v-btn block color="primary lighten-2" class="caption">
+								Se connecter
+							</v-btn>
+						</router-link>
+					</div>
+				</div>
+			</template>
 		</v-navigation-drawer>
 	</nav>
 </template>
@@ -46,15 +66,22 @@ export default {
 	},
 	data() {
 		return {
+			user: {
+				name: "Pingoo",
+				email: "jean.neymar@gmail.com",
+			},
 			colorNavIcon: colors.grey.lighten4,
 			drawer: false,
 			items: [
-				{ text: 'Home', icon: 'mdi-home', route: 'Home'},
-				{ text: 'Search', icon: 'mdi-magnify', route: 'Search'},
+				{ text: 'Accueil', icon: 'mdi-home', route: 'Home'},
+				{ text: 'Rechercher', icon: 'mdi-magnify', route: 'Search'},
 			],
 		}
 	},
 	computed: {
+		loggedIn() {
+			return true;
+		},
 		navWidth () {
 			switch (this.$vuetify.breakpoint.name) {
 				case 'xs': return 220
@@ -66,6 +93,11 @@ export default {
 			}
 		},
 	},
+	methods: {
+		logout() {
+			// TODO
+		},
+	}
 }
 </script>
 

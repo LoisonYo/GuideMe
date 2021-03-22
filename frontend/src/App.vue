@@ -2,21 +2,23 @@
 	<v-app>
 		<TheHeader/>
 		<v-main>
-			<v-container fluid class="pa-0">
+			<v-container fluid fill-height class="pa-0">
 				<router-view></router-view>
 			</v-container>
 		</v-main>
+		<TheFooter />
   </v-app>
 </template>
 
 <script>
+import TheFooter from './components/TheFooter.vue';
 import TheHeader from './components/TheHeader.vue';
 
 export default {
 	name: 'App',
-	components:
-	{
+	components: {
 		TheHeader,
+		TheFooter,
 	},
 	data: () => ({
 		//
@@ -24,8 +26,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 #app {
 	background-color: transparent;
+}
+
+a {
+	text-decoration: none;
 }
 </style>
