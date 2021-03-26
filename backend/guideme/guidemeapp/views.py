@@ -8,7 +8,7 @@ from guidemeapp.models import Activity, Type, Rating
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.AllowAny]
 
 class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
