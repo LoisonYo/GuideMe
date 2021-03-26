@@ -68,8 +68,17 @@ export default {
 		}
 	},
 	methods: {
-		register() {
-			// TODO
+		register()
+		{
+			this.$store.dispatch("register", {
+				name: this.name,
+				email: this.email,
+				password: this.password,
+				password_confirmation: this.confirmPassword,
+			})
+			.then(() => {
+				//this.$router.push({ name: "login" })
+			})
 		},
 	}
 }

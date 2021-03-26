@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from rest_framework import viewsets, permissions
 from django.contrib.auth.models import User
 from guidemeapp.serializers import UserSerializer, ActivitySerializer, TypeSerializer, RatingSerializer
-from guidemeapp.models import Activity, Type, Rating
+from guidemeapp.models import Activity, Type, Rating     
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
