@@ -77,7 +77,11 @@ export default {
 				password_confirmation: this.confirmPassword,
 			})
 			.then(() => {
-				//this.$router.push({ name: "login" })
+				//TODO Redirection
+				//this.$router.push({name:"login"})
+			})
+			.catch(error => {
+				console.log(Object.values(error.response.data).flat());
 			})
 		},
 	}

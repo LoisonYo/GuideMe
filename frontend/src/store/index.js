@@ -19,15 +19,10 @@ export default new Vuex.Store({
 	actions: {
 		async register(context, data)
 		{
-			return new Promise((resolve, reject) => {
-				axios.post("users/", {
-					username: data.name,
-					email: data.email,
-					password: data.password,
-				})
-				.catch(error => {
-					reject(error)
-				})
+			return axios.post("users/", {
+				username: data.name,
+				email: data.email,
+				password: data.password,
 			})
 		},
 	},
