@@ -23,8 +23,8 @@ namespace :django do
     desc 'Apply migrations'
     task :migrate do
         on roles(:web) do |h|
-            execute "cp #{shared_path}/.env #{release_path}/backend/PerroquetProject/.env"
-            execute "source #{venv_path}/bin/activate && python3 #{release_path}/backend/manage.py migrate && cd #{release_path}/backend &&python3 #{release_path}/backend/manage.py collectstatic --noinput"
+            execute "cp #{shared_path}/.env #{release_path}/backend/guideme/.env"
+            execute "source #{venv_path}/bin/activate && python3 #{release_path}/backend/guideme/manage.py migrate && cd #{release_path}/backend &&python3 #{release_path}/backend/guideme/manage.py collectstatic --noinput"
 	    end
     end
     
