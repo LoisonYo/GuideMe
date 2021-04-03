@@ -8,6 +8,7 @@ import Register from "../views/users/Register"
 import ActivityDetails from "../views/activities/ActivityDetails"
 import ActivityCreate from "../views/activities/ActivityCreate"
 import Search from "../views/activities/Search"
+import SearchResults from "../views/activities/SearchResults"
 
 
 Vue.use(VueRouter);
@@ -37,11 +38,11 @@ const routes = [
 		name: "Search",
 		component: Search
 	},
-	// {
-	// 	path: "/search/results",
-	// 	name: "Results",
-	// 	component: Results
-	// },
+	{
+		path: "/search/results",
+		name: "Results",
+		component: SearchResults
+	},
 	{
 		path: "/activity/:id",
 		name: "ActivityDetails",
