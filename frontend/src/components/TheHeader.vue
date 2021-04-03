@@ -44,7 +44,7 @@
 					</div>
 					<div v-else>
 						<router-link :to="{ name: 'Login' }">
-							<v-btn block color="primary lighten-2" class="caption">
+							<v-btn elevation="0" block color="primary lighten-2" class="caption secondary--text" :class="{'primary darken-1 text--darken-4': !$vuetify.theme.dark}">
 								Se connecter
 							</v-btn>
 						</router-link>
@@ -80,7 +80,7 @@ export default {
 	},
 	computed: {
 		loggedIn() {
-			return true;
+			return false;
 		},
 		navWidth () {
 			switch (this.$vuetify.breakpoint.name) {
