@@ -60,7 +60,7 @@ export default {
 	},
 	methods: {
 		oyo() {
-			console.log(this.center.lat + " " + this.center.lng);
+			console.log(this.center.lat + " " + this.center.lng + " " + this.radius);
 		},
 		setPosition(event) {
 			this.center = event.latlng;
