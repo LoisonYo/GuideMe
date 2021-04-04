@@ -3,8 +3,6 @@
 
 		<OptionsSearch v-on:value="radius = $event" />
 
-		
-
 		<l-map :zoom="zoom" :center="origin" ref="map"
 			style="height: 100vh; width:100%; position: fixed; top:0;"
 			@click="setPosition"

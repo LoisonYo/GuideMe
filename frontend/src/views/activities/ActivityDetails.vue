@@ -1,11 +1,11 @@
 <template>
 	<div style="width:100%;">
 		<v-img :src="img.src" :alt="img.alt" 
-			height="250"
+			height="300"
 			style="position: fixed; top: 0; left: 0; z-index: -1;"
 		/>
 
-		<v-sheet color="primary" class="pa-8 rounded-t-xl" style="margin-top: 150px;">
+		<v-sheet color="primary" class="pa-8 rounded-t-xl" style="margin-top: 280px;">
 			<div class="d-flex justify-space-between align-end mb-5">
 				<h2 class="display-2 secondary--text">{{ title }}</h2>
 				<div style="text-align: center;">
