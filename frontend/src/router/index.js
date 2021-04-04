@@ -9,6 +9,7 @@ import ActivityDetails from "../views/activities/ActivityDetails"
 import ActivityCreate from "../views/activities/ActivityCreate"
 import Search from "../views/activities/Search"
 import SearchResults from "../views/activities/SearchResults"
+import NotFound from "../views/NotFound"
 
 
 Vue.use(VueRouter);
@@ -69,11 +70,11 @@ const routes = [
 	// 	component: TODO,
 	// 	meta:	{ requiresAuth: true }
 	// },
-	// {
-	// 	path: "/catchAll(.*)",
-	// 	name: NotFound,
-	// 	component: NotFound
-	// }
+	{
+		path: "/:catchAll(.*)",
+		name: NotFound,
+		component: NotFound
+	}
 	// { 
 	// 	path: "/about",
 	// 	name: "About",
