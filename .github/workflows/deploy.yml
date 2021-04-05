@@ -43,5 +43,5 @@ jobs:
 
       - name: Deploy
         run: |
-          sudo bundle exec cap production deploy
+          sudo bundle install && sudo bundle exec cap production deploy
         
