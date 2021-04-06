@@ -45,6 +45,12 @@ const routes = [
 		component: SearchResults
 	},
 	{
+		path: "/activity/create",
+		name: "ActivityCreate",
+		component: ActivityCreate,
+		
+	},
+	{
 		path: "/activity/:id",
 		name: "ActivityDetails",
 		component: ActivityDetails,
@@ -58,12 +64,7 @@ const routes = [
 	// 	component: TODO,
 	// 	meta:	{ requiresAuth: true }
 	// },
-	{
-		path: "/activity/create",
-		name: "ActivityCreate",
-		component: ActivityCreate,
-		meta:	{ requiresAuth: true }
-	},
+
 	// {
 	// 	path: "/activity/edit",
 	// 	name: "TODO",

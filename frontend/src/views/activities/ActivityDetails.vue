@@ -20,12 +20,12 @@
 			</div>
 			
 			<div style="width:100%; text-align: center;">
-				<router-link :to="link" >
+				<a :href="link">
 					<v-btn rounded color="accent" elevation="0">
 						<v-icon left>mdi-link-variant</v-icon>
 						Site officiel
 					</v-btn>
-				</router-link>
+				</a>
 			</div>
 			<v-divider class="my-10 "></v-divider>		
 			<ReviewActivity />
