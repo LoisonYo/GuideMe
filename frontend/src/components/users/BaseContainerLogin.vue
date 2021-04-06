@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%; width:100%;" class="pt-14 pt-md-16 ">
+  <div style="height:100%; width:100%;" class="pt-14 pt-md-16">
 		<TheBackground />
 		
 		<h1 class="text-center
