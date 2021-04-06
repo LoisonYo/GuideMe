@@ -75,6 +75,7 @@ export default {
 			items: [
 				{ text: 'Accueil', icon: 'mdi-home', route: 'Home'},
 				{ text: 'Rechercher', icon: 'mdi-magnify', route: 'Search'},
+				{ text: 'Ajouter une activité', icon: 'mdi-playlist-edit', route: 'ActivityCreate'},
 			],
 		}
 	},
@@ -84,7 +85,7 @@ export default {
 		},
 		navWidth () {
 			switch (this.$vuetify.breakpoint.name) {
-				case 'xs': return 220
+				case 'xs': 
 				case 'sm': return 240
 				case 'md': return 260
 				case 'lg': return 280
