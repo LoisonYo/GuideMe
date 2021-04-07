@@ -3,7 +3,7 @@
 
 		<OptionsSearch v-on:value="radius = Number($event)" />
 
-		<l-map :zoom="zoom" :center="origin" ref="map"
+		<l-map :zoom="zoom" :center="origin" ref="map" :worldCopyJump="true" 
 			style="height: 100vh; width:100%; position: fixed; top:0;"
 			@click="setPosition"
 			@update:center="centerUpdate"
@@ -44,6 +44,7 @@ export default {
 	data() {
 		return {
 			radius: 1000,
+			maxBounds: [[-90,-180], [90,180]],
 			zoom: 13,
 			url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -58,10 +59,12 @@ export default {
 	},
 	methods: {
 		oyo() {
+			console.log(this.center.wrap().lat + " " + this.center.wrap().lng + " " );
 			console.log(this.center.lat + " " + this.center.lng + " " + this.radius);
 		},
 		setPosition(event) {
 			this.center = event.latlng;
+			this.oyo();
 		},
 		zoomUpdate(zoom) {
 			this.currentZoom = zoom;
@@ -74,6 +77,7 @@ export default {
 		this.$nextTick(() => {
 			this.map = this.$refs.map.mapObject // work as expected
 			this.map.zoomControl.remove()
+			
 		});
 	},
 }

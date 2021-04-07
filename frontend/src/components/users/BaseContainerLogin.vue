@@ -10,7 +10,7 @@
 
 		<v-card color="primary" 
 			max-width="400px"
-			style="width: calc(100% - 104px);" 
+			style="width: calc(100% - 80px);" 
 			class="mt-4 mb-16 mx-auto pa-12 rounded-xl text-center">
 
 			<slot></slot>	
