@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-		<TheHeader/>
+		<TheHeader />
 		<v-main>
 			<v-container fluid fill-height class="pa-0">
 				<router-view></router-view>

@@ -8,6 +8,8 @@ import Register from "../views/users/Register"
 import ActivityDetails from "../views/activities/ActivityDetails"
 import ActivityCreate from "../views/activities/ActivityCreate"
 import Search from "../views/activities/Search"
+import SearchResults from "../views/activities/SearchResults"
+import NotFound from "../views/NotFound"
 
 
 Vue.use(VueRouter);
@@ -37,11 +39,17 @@ const routes = [
 		name: "Search",
 		component: Search
 	},
-	// {
-	// 	path: "/search/results",
-	// 	name: "Results",
-	// 	component: Results
-	// },
+	{
+		path: "/search/results",
+		name: "Results",
+		component: SearchResults
+	},
+	{
+		path: "/activity/create",
+		name: "ActivityCreate",
+		component: ActivityCreate,
+		
+	},
 	{
 		path: "/activity/:id",
 		name: "ActivityDetails",
@@ -56,23 +64,18 @@ const routes = [
 	// 	component: TODO,
 	// 	meta:	{ requiresAuth: true }
 	// },
-	{
-		path: "/activity/create",
-		name: "ActivityCreate",
-		component: ActivityCreate,
-		meta:	{ requiresAuth: true }
-	},
+
 	// {
 	// 	path: "/activity/edit",
 	// 	name: "TODO",
 	// 	component: TODO,
 	// 	meta:	{ requiresAuth: true }
 	// },
-	// {
-	// 	path: "/catchAll(.*)",
-	// 	name: NotFound,
-	// 	component: NotFound
-	// }
+	{
+		path: "/:catchAll(.*)",
+		name: NotFound,
+		component: NotFound
+	}
 	// { 
 	// 	path: "/about",
 	// 	name: "About",

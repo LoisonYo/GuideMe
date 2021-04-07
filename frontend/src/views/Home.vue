@@ -5,7 +5,7 @@
 		<v-sheet height="100vh" color="transparent" 
 			style="overflow: hidden;"
 			class="grey--text text--lighten-4
-			pt-14 pt-md-16 mt-n14 mt-md-n16 
+			pt-14 pt-md-16 
 			d-flex flex-column align-center justify-space-between">
 
 			<div style="margin-top: 5vh; text-align: center;">

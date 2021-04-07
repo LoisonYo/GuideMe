@@ -1,16 +1,17 @@
 <template>
-  <div style="height:100%; width:100%;">
+  <div style="height:100%; width:100%;" class="pt-14 pt-md-16">
 		<TheBackground />
 		
-		<h1 class="display-2 text-center mt-5
-			grey--text text--lighten-4 font-weight-regular">
+		<h1 class="text-center
+			grey--text text--lighten-4 font-weight-regular"
+			style="font-size: 2.4rem;">
 			Guide Me
 		</h1>
 
 		<v-card color="primary" 
 			max-width="400px"
-			style="width: calc(100% - 104px);" 
-			class="mt-6 mb-16 mx-auto pa-12 rounded-xl text-center">
+			style="width: calc(100% - 80px);" 
+			class="mt-4 mb-16 mx-auto pa-12 rounded-xl text-center">
 
 			<slot></slot>	
 

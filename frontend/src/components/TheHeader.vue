@@ -1,6 +1,6 @@
 <template>
 	<nav>
-		<v-app-bar app absolute color="transparent" flat style="z-index: 10;">
+		<v-app-bar absolute color="transparent" flat style="z-index: 10;">
 			<v-app-bar-nav-icon class="mx-0" v-on:click="drawer = !drawer">
 				<input type="checkbox" id="openmenu-input" v-model="drawer">
 				<label id="hamburger-lbl" for="openmenu-input">
@@ -44,7 +44,7 @@
 					</div>
 					<div v-else>
 						<router-link :to="{ name: 'Login' }">
-							<v-btn block color="primary lighten-2" class="caption">
+							<v-btn elevation="0" block color="primary lighten-2" class="caption secondary--text" :class="{'primary darken-1 text--darken-4': !$vuetify.theme.dark}">
 								Se connecter
 							</v-btn>
 						</router-link>
@@ -75,16 +75,17 @@ export default {
 			items: [
 				{ text: 'Accueil', icon: 'mdi-home', route: 'Home'},
 				{ text: 'Rechercher', icon: 'mdi-magnify', route: 'Search'},
+				{ text: 'Ajouter une activité', icon: 'mdi-playlist-edit', route: 'ActivityCreate'},
 			],
 		}
 	},
 	computed: {
 		loggedIn() {
-			return true;
+			return false;
 		},
 		navWidth () {
 			switch (this.$vuetify.breakpoint.name) {
-				case 'xs': return 220
+				case 'xs': 
 				case 'sm': return 240
 				case 'md': return 260
 				case 'lg': return 280
