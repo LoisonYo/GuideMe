@@ -1,5 +1,5 @@
 <template>
-	<div style="width:100%;">
+	<div style="width:100%; height: 100%;">
 		
 		<v-img :src="img" alt="image uploaded" 
 			height="300" width="100%"
@@ -17,7 +17,7 @@
 			<input type="file" style="display:none" accept="image/*" ref="inputUpload" @input="uploadFiles">
 		</div>
 
-		<v-sheet color="primary" class="pa-8 rounded-t-xl">
+		<v-sheet color="primary" class="pa-8 rounded-t-xl" style="height: calc(100% - 280px);">
 			<v-sheet max-width="600px" class="transparent mx-auto">
 			<h2 class="text-center mb-8 headline secondary--text">
 				Ajouter une activité
