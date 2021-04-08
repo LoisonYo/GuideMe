@@ -48,7 +48,7 @@ const routes = [
 		path: "/activity/create",
 		name: "ActivityCreate",
 		component: ActivityCreate,
-		
+		// meta:	{ requiresAuth: true }
 	},
 	{
 		path: "/activity/:id",
@@ -64,7 +64,6 @@ const routes = [
 	// 	component: TODO,
 	// 	meta:	{ requiresAuth: true }
 	// },
-
 	// {
 	// 	path: "/activity/edit",
 	// 	name: "TODO",
