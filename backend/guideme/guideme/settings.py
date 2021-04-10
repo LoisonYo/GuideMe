@@ -25,7 +25,7 @@ SECRET_KEY = 'vtk20xhu65=(-obs1nk5#@fad9^@7qa7+y-)@g&5cqvb^q@n09'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -45,14 +45,14 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'guideme.urls'
@@ -106,20 +106,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-    ]
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+                'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ),
 }
-
-#ALLOWED_HOSTS=['http://localhost:8080']
-
-#CORS_ORIGIN_ALLOW_ALL = False
-
-#CORS_ORIGIN_WHITELIST = (
-#    'http://localhost:8080',
-#)
 
 CORS_ORIGIN_ALLOW_ALL = True
 

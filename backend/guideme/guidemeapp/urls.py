@@ -11,5 +11,5 @@ router.register(r'ratings', views.RatingViewSet)
 
 urlpatterns = [
     path('/', include(router.urls)),
-    path('login', include('oauth2_provider.urls', namespace='oauth2_provider')),
+    path('/login/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
