@@ -10,6 +10,7 @@ export default new Vuex.Store({
 	state:
 	{
 		activities: [],
+		ratings: [],
 		user: null,
 		access_token: window.sessionStorage.getItem('access_token'),
 		refresh_token: window.sessionStorage.getItem('refresh_token'),
@@ -21,6 +22,16 @@ export default new Vuex.Store({
 		{
             state.user = user;
         },
+
+		updateActivities(state, activities)
+		{
+			state.activities = activities;
+		},
+
+		updateRatings(state, ratings)
+		{
+			state.ratings = ratings;
+		},
 	},
 
 	actions: {
@@ -57,6 +68,43 @@ export default new Vuex.Store({
 			window.sessionStorage.removeItem("access_token");
 			window.sessionStorage.removeItem("refresh_token");
 			commit("updateAuthUser", null);
+		},
+
+		async fetchActivities({commit})
+		{
+			var activities = await axios.get('activities/');
+			commit("updateActivities", activities);
+		},
+
+		async fetchRatings({commit}, data)
+		{
+			var ratings = await axios.post('activities/ratings/', {
+				'id': data.activity_id,
+			});
+
+			commit("updateRatings", ratings);
+		},
+
+		async createActivity(data)
+		{
+			await axios.post('activities/', {
+				'creator': data.creator,
+				'name': data.name,
+				'description': data.description,
+				'image': data.image,
+				'longitude': data.longitude,
+				'latitude': data.latitude,
+			})
+		},
+
+		async createRating(context, data)
+		{
+			await axios.post('ratings/', {
+				'activity': data.activity,
+				'creator': data.creator,
+				'note': data.note,
+				'comment': data.comment,
+			})
 		},
 	},
 	modules: {},

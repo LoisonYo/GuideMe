@@ -5,7 +5,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'password']
+        fields = ['url', 'id', 'username', 'email', 'password']
         extra_kwargs = {'password': {'write_only': True}}
     
     def create(self, validated_data):
@@ -18,7 +18,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Activity
-        fields = ['creator', 'name', 'description', 'image', 'longitude', 'latitude']
+        fields = ['url', 'id', 'creator', 'name', 'description', 'longitude', 'latitude']
 
 class TypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -28,4 +28,4 @@ class TypeSerializer(serializers.HyperlinkedModelSerializer):
 class RatingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Rating
-        fields = ['note', 'comment']
+        fields = ['note', 'comment', 'activity', 'creator']

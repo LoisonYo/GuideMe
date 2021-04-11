@@ -64,6 +64,19 @@ export default {
 			}
 		}
 	},
+
+	mounted()
+	{
+		this.$store.dispatch('fetchRatings', {
+			'activity_id': 2,
+		})
+		.then(() => {
+			console.log(this.$store.state.ratings);
+		})
+		.catch(error => {
+			console.log(error);
+		})
+	},
 };
 </script>
 
