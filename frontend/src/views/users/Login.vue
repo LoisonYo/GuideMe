@@ -44,8 +44,18 @@ export default {
 		}
 	},
 	methods: {
-		login() {
-			// TODO
+		login()
+		{
+			this.$store.dispatch("login", {
+				username: this.name,
+				password: this.password,
+			})
+			.then(() => {
+				this.$router.push({name:"Home"})
+			})
+			.catch(error => {
+				console.log(Object.values(error.response.data).flat());
+			})
 		}
 	}
 }

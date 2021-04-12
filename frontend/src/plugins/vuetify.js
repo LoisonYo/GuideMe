@@ -17,6 +17,7 @@ Vue.use(Vuetify);
 
 export default new Vuetify({
 	theme: {
+		background: colors.grey.darken4,
 		dark: true,
 		options: { customProperties: true },
 		themes: {
