@@ -18,12 +18,12 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Activity
-        fields = ['url', 'id', 'creator', 'name', 'description', 'longitude', 'latitude', 'website']
+        fields = ['url', 'id', 'creator', 'name', 'description', 'longitude', 'latitude', 'website', 'types']
 
 class TypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Type
-        fields = ['name']
+        fields = ['url', 'name']
 
 class RatingSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

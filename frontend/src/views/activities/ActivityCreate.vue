@@ -23,7 +23,7 @@
 				Ajouter une activité
 			</h2>
 
-			<v-form @submit.prevent="updateActivity" v-model="valid" class="text-center">
+			<v-form @submit.prevent="createActivity" v-model="valid" class="text-center">
 				<v-text-field v-model="name" label="Nom" 
 					:rules="nameRules" required 
 					color="accent" clearable>
@@ -34,7 +34,7 @@
 					color="accent" auto-grow clearable>
 				</v-textarea>
 
-				<v-autocomplete v-model="values" :items="tags" item-text="name" label="Catégories"
+				<v-autocomplete v-model="values" item-value="url" item-text="name" :items="tags" label="Catégories"
 					chips deletable-chips multiple
 					color="accent" item-color="accent">
 				</v-autocomplete>
@@ -45,7 +45,9 @@
 					color="accent">
 				</v-text-field>
 
-				<p v-show="display_error" class="warning--text body-2 mb-0 mt-8">Il y a une erreur lors de la création de l'activité.</p>
+				<ul class="warning--text body-2 mb-0 mt-8">
+					<li v-for="(value, index) in errors" :key="index">{{ index }} : {{ value }}</li>
+				</ul>
 			
 				<v-btn :disabled="!valid" type="submit"
 					rounded color="accent" elevation="0" class="my-8">
@@ -75,7 +77,7 @@ export default {
 			values: [],
 			link: "",
 			valid: false,
-			display_error: false,
+			errors: [],
 		}
 	},
 
@@ -90,14 +92,30 @@ export default {
 			this.$store.dispatch("fetchTags")
 			.then((tags) => {
 				this.tags = Object.values(tags.data).flat();
-				console.log(this.tags);
 			})
 		},
 
-		updateActivity() {
-			// TODO
+		createActivity()
+		{
+			this.$store.dispatch("createActivity", {
+				creator: this.$store.state.user.url,
+				name: this.name,
+				description: this.description,
+				longitude: this.longitude,
+				latitude: this.latitude,
+				website: this.link,
+				tags: this.values,
+			})
+			.then(() => {
+				
+			})
+			.catch(errors => {
+				this.errors = errors.response.data;
+			})
 		},
-		resetFiles() {
+
+		resetFiles()
+		{
 			this.$refs.inputUpload.value = '';
 			this.img = "";
 		},

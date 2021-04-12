@@ -23,6 +23,13 @@ export default {
 	data: () => ({
 		//
 	}),
+	created()
+	{
+		if (this.$store.getters.loggedIn)
+		{
+			this.$store.dispatch("fetchAuthUser");
+		}
+	},
 };
 </script>
 

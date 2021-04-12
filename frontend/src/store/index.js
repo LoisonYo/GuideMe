@@ -10,12 +10,30 @@ export default new Vuex.Store({
 	state:
 	{
 		user: null,
-		access_token: window.sessionStorage.getItem('access_token'),
+		access_token: window.sessionStorage.getItem('access_token', null),
 		refresh_token: window.sessionStorage.getItem('refresh_token'),
+	},
+
+	getters: 
+	{
+		loggedIn(state)
+		{
+			return state.access_token != null;
+		},
 	},
 
 	mutations:
 	{
+		updateAccessToken(state, access_token)
+		{
+			state.access_token = access_token
+		},
+
+		deleteAccessToken(state)
+		{
+			state.access_token = null
+		},
+
 		updateAuthUser(state, user)
 		{
             state.user = user;
@@ -45,17 +63,23 @@ export default new Vuex.Store({
 			window.sessionStorage.setItem("access_token", response.data.access_token);
 			window.sessionStorage.setItem("refresh_token", response.data.refresh_token);
 
-			axios.defaults.headers.common["Authorization"] = "Bearer " + response.data.access_token;
-			response = await axios.get("users/auth/");
-
-			commit("updateAuthUser", response.data);
+			commit('updateAccessToken', response.data.access_token)
 		},
 
 		logout({commit})
 		{
 			window.sessionStorage.removeItem("access_token");
 			window.sessionStorage.removeItem("refresh_token");
+			commit('deleteAccessToken')
 			commit("updateAuthUser", null);
+		},
+
+		async fetchAuthUser({commit})
+		{
+			axios.defaults.headers.common["Authorization"] = "Bearer " + this.state.access_token;
+			var response = await axios.get("users/auth/");
+
+			commit("updateAuthUser", response.data);
 		},
 
 		async fetchActivities(context, data)
@@ -85,7 +109,7 @@ export default new Vuex.Store({
 			return tags;
 		},
 
-		async createActivity(data)
+		async createActivity(context, data)
 		{
 			await axios.post('activities/', {
 				'creator': data.creator,
@@ -94,6 +118,8 @@ export default new Vuex.Store({
 				'image': data.image,
 				'longitude': data.longitude,
 				'latitude': data.latitude,
+				'website': data.website,
+				'types': data.tags,
 			})
 		},
 

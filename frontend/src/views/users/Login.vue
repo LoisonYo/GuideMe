@@ -51,6 +51,7 @@ export default {
 				password: this.password,
 			})
 			.then(() => {
+				this.$store.dispatch("fetchAuthUser")
 				this.$router.push({name:"Home"})
 			})
 			.catch(() => {

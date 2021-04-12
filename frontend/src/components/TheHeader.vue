@@ -80,8 +80,9 @@ export default {
 		{
 			return this.$store.state.user;
 		},
-		loggedIn() {
-			return this.$store.state.user != null;
+		loggedIn()
+		{
+			return this.$store.getters.loggedIn;
 		},
 		navWidth () {
 			switch (this.$vuetify.breakpoint.name) {
