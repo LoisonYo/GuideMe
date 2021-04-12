@@ -38,7 +38,7 @@
 <script>
 import IconCategoryActivity from '@/components/activities/IconCategoryActivity.vue'
 import ReviewActivity from '@/components/activities/ReviewActivity.vue'
-import sushi from "@/assets/background/banner.png";
+import sushi from "@/assets/activity/sushi.png";
 
 export default {
 	components: { 

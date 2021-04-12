@@ -14,7 +14,7 @@
 			<l-circle
 				:lat-lng="center"
 				:radius="radius"
-				color="#e74c3c"
+				color="#7B87D1"
 			/>
 
 			<l-marker
