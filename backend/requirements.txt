@@ -18,7 +18,6 @@ requests==2.25.1
 six==1.15.0
 sqlparse==0.4.1
 urllib3==1.26.4
-pip freeze
 asgiref==3.3.4
 certifi==2020.12.5
 cffi==1.14.5
