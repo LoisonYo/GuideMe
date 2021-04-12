@@ -21,7 +21,9 @@
 				color="accent">
 			</v-text-field>
 
-			<p v-show="display_error" class="warning--text body-2 my-3">salut</p>
+			<ul class="warning--text body-2 my-3">
+				<li v-for="(value, index) in errors" :key="index">{{ value }}</li>
+			</ul>
 			
 			<v-btn :disabled="!valid" type="submit"
 				rounded color="accent" elevation="0" class="my-7">
@@ -60,6 +62,7 @@ export default {
 
 			],
 			display_error: false,
+			errors: []
 		}
 	},
 	computed: {
@@ -77,11 +80,10 @@ export default {
 				password_confirmation: this.confirmPassword,
 			})
 			.then(() => {
-				//TODO Redirection
-				//this.$router.push({name:"login"})
+				this.$router.push({name:"Login"})
 			})
 			.catch(error => {
-				console.log(Object.values(error.response.data).flat());
+				this.errors = Object.values(error.response.data).flat();
 			})
 		},
 	}
