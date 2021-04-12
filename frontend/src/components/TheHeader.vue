@@ -81,7 +81,6 @@ export default {
 			return this.$store.state.user;
 		},
 		loggedIn() {
-			console.log(this.$store.state.user)
 			return this.$store.state.user != null;
 		},
 		navWidth () {

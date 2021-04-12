@@ -16,6 +16,7 @@ class Activity(models.Model):
     image = models.FilePathField(path=images_path())
     latitude = models.DecimalField(max_digits=7, decimal_places=5)
     longitude = models.DecimalField(max_digits=8, decimal_places=5)
+    website = models.CharField(max_length=200, null=True)
     types = models.ManyToManyField(Type)
 
 class Rating(models.Model):

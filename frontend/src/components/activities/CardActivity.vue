@@ -8,7 +8,7 @@
 			<router-link :to="{ name: 'ActivityDetails', params: { id: title }}" class="secondary--text">link</router-link>
 			<v-card-title
 				class="headline"
-				v-text="item.title">
+				v-text="activity.name">
 			</v-card-title>
 			<v-card-subtitle>{{item.note}}</v-card-subtitle>
 		</div>
@@ -37,7 +37,6 @@ export default {
 	data() {
 		return {
 			item: {
-				title: "Sushi",
 				note: 7.3,
 				img: sushi,
 			},

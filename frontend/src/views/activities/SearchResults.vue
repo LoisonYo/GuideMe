@@ -1,11 +1,10 @@
 <template>
 	<div class="primary pt-15 pb-10 px-7" style="width: 100%; height: 100%;">
 		<h1>Résultats</h1>
-		<p> {{ $route.query }}</p>
 
 		<div class="d-flex flex-column align-center">
-			<div v-for="(title, index) in titles" :key="index" style="width: 100%;">
-				<card-activity class="mx-auto my-2" :activity="title"></card-activity>
+			<div v-for="(value, index) in activities" :key="index" style="width: 100%;">
+				<card-activity class="mx-auto my-2" :activity="value"></card-activity>
 			</div>
 
 			<v-progress-circular v-intersect="infiniteScrolling"
@@ -27,6 +26,7 @@ export default {
 	name: 'SearchResults',
 	data() {
 		return {
+			activities: [],
 			titles: [],
 			page: 1,
 			loading: true,
@@ -42,9 +42,20 @@ export default {
 		this.fetchData();
 	},
 	methods: {
-		async fetchData() {
-			const response = await axios.get(this.url);
-			this.titles = response.data;
+		async fetchData()
+		{
+			var values = this.$route.query['center'].replace(/\s/g, '').split('(')[1].split(')')[0].split(',');
+			var latitude = parseFloat(values[0]);
+			var longitude = parseFloat(values[1]);
+
+			var intent = await this.$store.dispatch('fetchActivities', {
+				longitude: longitude,
+				latitude: latitude,
+				radius: this.$route.query.radius,
+			})
+
+			this.activities = Object.values(intent.data).flat();
+			this.loading = false;
 		},
 		infiniteScrolling() {
 			setTimeout(() => {

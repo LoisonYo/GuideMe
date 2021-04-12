@@ -9,8 +9,6 @@ axios.defaults.baseURL = "http://localhost:8000/api/";
 export default new Vuex.Store({
 	state:
 	{
-		activities: [],
-		ratings: [],
 		user: null,
 		access_token: window.sessionStorage.getItem('access_token'),
 		refresh_token: window.sessionStorage.getItem('refresh_token'),
