@@ -2,7 +2,7 @@
 lock "~> 3.16.0"
 
 set :application, "guideme"
-set :repo_url, "git@github.com:HE-Arc/GuideMe.git"
+set :repo_url, "https://github.com/HE-Arc/GuideMe.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
