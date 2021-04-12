@@ -41,7 +41,10 @@ jobs:
         run: |
           ssh-keyscan -p ${{ secrets.DEPLOY_HOST_PORT }} ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Deploy
+      - name: Bundle Install
         run: |
-          bundle install && sudo bundle exec cap production deploy
+          bundle install 
         
+      - name: Bundle exec
+        run: |
+          bundle exec cap production deploy
