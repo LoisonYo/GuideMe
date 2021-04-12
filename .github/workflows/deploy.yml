@@ -31,20 +31,27 @@ jobs:
         with:
           ruby-version: '2.7'
           bundler-cache: true
+      
+       - name: Capistrano deploy
+         uses: miloserdow/capistrano-deploy@master
+         with:
+           target: production
+           deploy_key: ${{ secrets.DEPLOY_ENC_PASS }}
+           #enc_rsa_key_val: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
 
-      - name: install ssh key
-        uses: webfactory/ssh-agent@v0.5.1
-        with:
-          ssh-private-key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
+      # - name: install ssh key
+      #   uses: webfactory/ssh-agent@v0.5.1
+      #   with:
+      #     ssh-private-key: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
 
-      - name: Add known host
-        run: |
-          ssh-keyscan -p ${{ secrets.DEPLOY_HOST_PORT }} ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
+      # - name: Add known host
+      #   run: |
+      #     ssh-keyscan -p ${{ secrets.DEPLOY_HOST_PORT }} ${{ secrets.DEPLOY_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Bundle Install
-        run: |
-          bundle install 
+      # - name: Bundle Install
+      #   run: |
+      #     bundle install 
         
-      - name: Bundle exec
-        run: |
-          bundle exec cap production deploy
+      # - name: Bundle exec
+      #   run: |
+      #     bundle exec cap production deploy
