@@ -53,8 +53,8 @@ export default {
 			.then(() => {
 				this.$router.push({name:"Home"})
 			})
-			.catch(error => {
-				console.log(Object.values(error.response.data).flat());
+			.catch(() => {
+				this.display_error = true;
 			})
 		}
 	}

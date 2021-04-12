@@ -61,7 +61,6 @@ export default {
 			confirmRules: [
 
 			],
-			display_error: false,
 			errors: []
 		}
 	},
