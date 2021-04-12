@@ -32,12 +32,12 @@ jobs:
           ruby-version: '2.7'
           bundler-cache: true
       
-       - name: Capistrano deploy
-         uses: miloserdow/capistrano-deploy@master
-         with:
-           target: production
-           deploy_key: ${{ secrets.DEPLOY_ENC_PASS }}
-           #enc_rsa_key_val: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
+      - name: Capistrano deploy
+        uses: miloserdow/capistrano-deploy@master
+        with:
+          target: production
+          deploy_key: ${{ secrets.DEPLOY_ENC_PASS }}
+          #enc_rsa_key_val: ${{ secrets.SERVER_PRIVATE_SSH_KEY }}
 
       # - name: install ssh key
       #   uses: webfactory/ssh-agent@v0.5.1
