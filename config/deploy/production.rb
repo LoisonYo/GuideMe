@@ -13,7 +13,7 @@ set :deploy_to, "/var/www/#{fetch(:application)}"
 
 after 'deploy:publishing', 'uwsgi:restart'
 after 'deploy:updating', 'python:update_venv'
-after 'python:update_env', 'django:migrate'
+after 'python:update_venv', 'django:migrate'
 after 'django:migrate', 'frontend:compile'
 
 namespace :uwsgi do
