@@ -30,7 +30,7 @@ namespace :python do
         on roles([:app, :web]) do |h|
 	    execute "python3 -m venv #{venv_path}"
             execute "source #{venv_path}/bin/activate"
-	    execute "#{venv_path}/bin/pip install -r #{release_path}/back/requirements"
+	    execute "#{venv_path}/bin/pip install -r #{release_path}/backend/requirements.txt"
         end
     end
 
@@ -46,11 +46,11 @@ namespace :python do
             end
 
             def upload_target_path
-                File.join(release_path, "back/#{fetch(:projectname)}/uploads")
+                File.join(release_path, "backend/#{fetch(:projectname)}/uploads")
             end
 
             def target_path
-                File.join(release_path, "back/#{fetch(:projectname)}/#{fetch(:projectname)}/env.py")
+                File.join(release_path, "backend/#{fetch(:projectname)}/#{fetch(:projectname)}/env.py")
             end
 
             info "config file #{config_path}"
@@ -75,14 +75,14 @@ namespace :python do
     desc 'Django Migrations'
     task :django_migration do
         on roles([:app, :web]) do |h|
-	    execute "#{venv_path}/bin/python #{release_path}/back/zestproject/manage.py migrate"
+	    execute "#{venv_path}/bin/python #{release_path}/backend/guideme/manage.py migrate"
         end
     end
 end
 
 namespace :npm do
     def front_path
-        File.join(release_path, 'front')
+        File.join(release_path, 'frontend')
     end
 
     desc 'NPM install dependencies'
