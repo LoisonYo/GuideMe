@@ -45,7 +45,6 @@ end
 after 'deploy:updating', 'python:update_venv'
 
 namespace :python do
-
     def venv_path
         File.join(shared_path, 'env')
     end
@@ -53,8 +52,9 @@ namespace :python do
     desc 'update venv'
     task :update_venv do
         on roles([:app, :web]) do |h|
-            execute "echo #{release_path} HELOOOOOOO"
-            execute "source #{venv_path}/bin/activate && #{venv_path}/bin/pip install -r #{release_path}/backend/requirements.txt"
+            execute "python3 -m venv #{venv_path}"
+            execute "source #{venv_path}/bin/activate" 
+            execute "#{venv_path}/bin/pip install -r #{release_path}/backend/requirements.txt"
         end
     end
 end
