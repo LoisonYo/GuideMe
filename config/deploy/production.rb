@@ -53,7 +53,7 @@ namespace :python do
     desc 'update venv'
     task :update_venv do
         on roles([:app, :web]) do |h|
-            execute "cat #{venv_path} HELLOOOOOOOOOOO"
+            execute "echo #{venv_path} HELLOOOOOOOOOOO"
             execute "source #{venv_path}/bin/activate && #{venv_path}/bin/pip install -r #{release_path}/backend/requirements.txt"
         end
     end
