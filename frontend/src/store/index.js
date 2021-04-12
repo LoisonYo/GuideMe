@@ -22,16 +22,6 @@ export default new Vuex.Store({
 		{
             state.user = user;
         },
-
-		updateActivities(state, activities)
-		{
-			state.activities = activities;
-		},
-
-		updateRatings(state, ratings)
-		{
-			state.ratings = ratings;
-		},
 	},
 
 	actions: {
@@ -70,19 +60,24 @@ export default new Vuex.Store({
 			commit("updateAuthUser", null);
 		},
 
-		async fetchActivities({commit})
+		async fetchActivities(context, data)
 		{
-			var activities = await axios.get('activities/');
-			commit("updateActivities", activities);
+			var activities = await axios.post('activities/area/', {
+				'longitude': data.longitude,
+				'latitude': data.latitude,
+				'radius': data.radius,
+			});
+			
+			return activities;
 		},
 
-		async fetchRatings({commit}, data)
+		async fetchRatings(context, data)
 		{
 			var ratings = await axios.post('activities/ratings/', {
 				'id': data.activity_id,
 			});
 
-			commit("updateRatings", ratings);
+			return ratings;
 		},
 
 		async createActivity(data)

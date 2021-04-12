@@ -51,9 +51,7 @@ export default {
 				password: this.password,
 			})
 			.then(() => {
-				//TODO Redirection
-				console.log(this.$store.state.user);
-				//this.$router.push({name:"Home"})
+				this.$router.push({name:"Home"})
 			})
 			.catch(error => {
 				console.log(Object.values(error.response.data).flat());

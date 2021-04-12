@@ -26,6 +26,23 @@ class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
     permission_classes = [permissions.AllowAny]
+    permission_classes_by_action = {    
+        'area': [permissions.AllowAny],
+        'ratings': [permissions.AllowAny],
+    }
+
+    @action(detail=False, methods=['post'])
+    def area(self, request):
+        latitude = request.data['latitude']
+        longitude = request.data['longitude']
+        radius = request.data['radius']
+
+        activities = Activity.objects.all()
+        serializer = ActivitySerializer(activities, context={'request': request}, many=True)
+
+        return Response({
+            'activities': serializer.data,
+        })
 
     @action(detail=False, methods=['post'])
     def ratings(self, request):
