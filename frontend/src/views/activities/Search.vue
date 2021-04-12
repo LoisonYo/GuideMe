@@ -1,7 +1,7 @@
 <template>
 	<div style="width:100%;">
 
-		<OptionsSearch v-on:value="radius = Number($event)" />
+		<OptionsSearch v-on:value="radius = Number($event)" :center="center.wrap()" />
 
 		<l-map :zoom="zoom" :center="origin" ref="map" :worldCopyJump="true" 
 			style="height: 100vh; width:100%; position: fixed; top:0;"
@@ -14,13 +14,12 @@
 			<l-circle
 				:lat-lng="center"
 				:radius="radius"
-				color="#e74c3c"
+				color="#7B87D1"
 			/>
 
 			<l-marker
 				:lat-lng.sync="center"
 				:icon="icon"
-				@click="oyo"
 			/>
 		</l-map>
 	</div>
@@ -58,13 +57,8 @@ export default {
 		}
 	},
 	methods: {
-		oyo() {
-			console.log(this.center.wrap().lat + " " + this.center.wrap().lng + " " );
-			console.log(this.center.lat + " " + this.center.lng + " " + this.radius);
-		},
 		setPosition(event) {
 			this.center = event.latlng;
-			this.oyo();
 		},
 		zoomUpdate(zoom) {
 			this.currentZoom = zoom;
@@ -77,11 +71,10 @@ export default {
 		this.$nextTick(() => {
 			this.map = this.$refs.map.mapObject // work as expected
 			this.map.zoomControl.remove()
-			
 		});
 	},
 }
 </script>
 
-<style >
+<style>
 </style>

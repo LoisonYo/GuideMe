@@ -1,11 +1,12 @@
 <template>
-	<div style="width:100%;">
-		<v-img :src="img.src" :alt="img.alt" 
+	<div style="width:100%; height: 100%;">
+		<v-img :src="img.src" :alt="img.alt"
+			width="100%"
 			height="300"
 			style="position: fixed; top: 0; left: 0; z-index: -1;"
 		/>
 
-		<v-sheet color="primary" class="pa-8 rounded-t-xl" style="margin-top: 280px;">
+		<v-sheet color="primary" class="pa-8 rounded-t-xl" style="margin-top: 280px; height: calc(100% - 280px);" >
 			<div class="d-flex justify-space-between align-end mb-5">
 				<h2 class="display-2 secondary--text">{{ title }}</h2>
 				<div style="text-align: center;">
@@ -37,7 +38,7 @@
 <script>
 import IconCategoryActivity from '@/components/activities/IconCategoryActivity.vue'
 import ReviewActivity from '@/components/activities/ReviewActivity.vue'
-import sushi from "@/assets/background/banner.png";
+import sushi from "@/assets/activity/sushi.png";
 
 export default {
 	components: { 

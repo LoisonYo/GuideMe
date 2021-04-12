@@ -36,7 +36,7 @@
 				</v-text-field>
 			</v-sheet>		
 
-			<router-link :to="{ name: 'Results' }" class="mt-2" style="display:flex; justify-content: center; width: 100%;">
+			<router-link :to="{ name: 'Results', query: { radius: radius, center: center }}" class="mt-2" style="display:flex; justify-content: center; width: 100%;">
 				<v-btn rounded color="accent" elevation="0">Rechercher</v-btn>
 			</router-link>	
 		</v-sheet>
@@ -48,13 +48,19 @@ import { gsap } from 'gsap';
 
 export default {
 	name: "OptionsSearch",
+	props: {
+		center: {
+			type: Object,
+			required: true
+		}
+	},
 	data () {
 		return {
 			radius: 0,
 			tweenedNumber: 0,
 			min: 100,
 			max: 5e3,
-			toggle: true,
+			toggle: true
 		}
 	},
 	computed: {
