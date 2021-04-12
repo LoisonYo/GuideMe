@@ -7,7 +7,7 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-server "guideme.srvz-webapp.he-arc.ch", user: "poweruser", roles: %w{app db web}, port:1447
+server "srvz-webapp.he-arc.ch", user: "poweruser", roles: %w{app db web}, port:1447
 
 set :deploy_to, "/var/www/#{fetch(:application)}"
 
