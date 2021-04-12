@@ -36,8 +36,8 @@
 				<v-divider class="mx-2"></v-divider>
 				<div class="pa-2">
 					<div v-if="loggedIn">
-						<h4 class="body-1 text-center">{{user.name}}</h4>
-						<h5 class="caption text-center mb-3">{{user.email}}</h5>
+						<h4 class="body-1 text-center">{{ user.username }}</h4>
+						<h5 class="caption text-center mb-3">{{ user.email }}</h5>
 						<v-btn @click="logout" block color="primary lighten-2" class="caption">
 							Se déconnecter
 						</v-btn>
@@ -66,10 +66,6 @@ export default {
 	},
 	data() {
 		return {
-			user: {
-				name: "Pingoo",
-				email: "jean.neymar@gmail.com",
-			},
 			colorNavIcon: colors.grey.lighten4,
 			drawer: false,
 			items: [
@@ -80,8 +76,13 @@ export default {
 		}
 	},
 	computed: {
+		user()
+		{
+			return this.$store.state.user;
+		},
 		loggedIn() {
-			return false;
+			console.log(this.$store.state.user)
+			return this.$store.state.user != null;
 		},
 		navWidth () {
 			switch (this.$vuetify.breakpoint.name) {
@@ -96,7 +97,7 @@ export default {
 	},
 	methods: {
 		logout() {
-			// TODO
+			this.$store.dispatch("logout");
 		},
 	}
 }
