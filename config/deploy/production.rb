@@ -11,27 +11,10 @@ server "srvz-webapp.he-arc.ch", user: "poweruser", roles: %w{app db web}, port:1
 
 set :deploy_to, "/var/www/#{fetch(:application)}"
 
-after 'deploy:publishing', 'django:migrate'
-
-namespace :django do
-
-    def venv_path
-        File.join(shared_path, 'env')
-    end
-
-    desc 'Apply migrations'
-    task :migrate do
-        on roles(:web) do |h|
-            execute "cp #{shared_path}/env #{release_path}/backend/guideme/env"
-            execute "source #{venv_path}/bin/activate"
-            execute "python3 #{release_path}/backend/guideme/manage.py migrate"
-            execute "cd #{release_path}/backend"
-	    end
-    end
-    
-end
-
-after 'django:migrate', 'uwsgi:restart'
+after 'deploy:publishing', 'uwsgi:restart'
+after 'deploy:updating', 'python:update_venv'
+after 'python:update_env', 'django:migrate'
+after 'django:migrate', 'frontend:compile'
 
 namespace :uwsgi do
     desc 'Restart application'
@@ -41,8 +24,6 @@ namespace :uwsgi do
 	    end
     end
 end
-
-after 'deploy:updating', 'python:update_venv'
 
 namespace :python do
     def venv_path
@@ -59,13 +40,28 @@ namespace :python do
     end
 end
 
-after 'deploy:publishing', 'frontend:compile'
+namespace :django do
+
+    def venv_path
+        File.join(shared_path, 'env')
+    end
+
+    desc 'Apply migrations'
+    task :migrate do
+        on roles(:web) do |h|
+            execute "#{venv_path}/bin/python #{release_path}/backend/guideme/manage.py migrate"
+	    end
+    end
+    
+end
 
 namespace :frontend do
     desc 'compile frontend'
     task :compile do
         on roles(:web) do |h|
-	        execute "cd #{release_path}/frontend && npm install && npm run build"
+	        execute "cd #{release_path}/frontend"
+            execute "npm install"
+            execute "npm run build"
 	    end
     end
 end
