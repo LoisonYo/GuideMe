@@ -11,6 +11,11 @@ server "srvz-webapp.he-arc.ch", user: "poweruser", roles: %w{app db web}, port:1
 
 set :deploy_to, "/var/www/#{fetch(:application)}"
 
+after 'deploy:publishing', 'django:migrate'
+after 'django:migrate', 'uwsgi:restart'
+after 'deploy:updating', 'python:update_venv'
+
+
 namespace :uwsgi do
     desc 'Restart application'
     task :restart do
@@ -50,21 +55,19 @@ namespace :django do
     
 end
 
+
+
+
+
+
+
+
+
 namespace :frontend do
     desc 'compile frontend'
     task :compile do
         on roles(:web) do |h|
-	        execute "cd #{release_path}/frontend"
-            execute "npm install"
-            execute "npm run build"
+	        execute "cd #{release_path}/frontend && npm install && npm run build"
 	    end
     end
 end
-
-after 'deploy:publishing', 'uwsgi:restart'
-after 'uswgi:restart', 'deploy:cleanup'
-after 'deploy:cleanup', 'deploy:updating'
-after 'deploy:updating', 'python:update_venv'
-after 'python:update_venv', 'django:migrate'
-after 'django:migrate', 'frontend:compile'
-
