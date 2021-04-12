@@ -63,24 +63,7 @@ export default {
 				alt: "map icon",
 			}
 		}
-	},
-
-	mounted()
-	{
-		this.$store.dispatch("fetchActivities", {
-				longitude: 10.2,
-				latitude: 20.2,
-				radius: 10.0,
-			})
-			.then((activities) => {
-				console.log(activities);
-				//this.$router.push({name:"Home"})
-			})
-			.catch(error => {
-				console.log(Object.values(error.response.data).flat());
-			})
-	}
-		
+	},		
 };
 </script>
 
