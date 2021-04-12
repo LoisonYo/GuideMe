@@ -34,7 +34,7 @@
 					color="accent" auto-grow clearable>
 				</v-textarea>
 
-				<v-autocomplete v-model="values" :items="items" label="Catégories"
+				<v-autocomplete v-model="values" :items="tags" item-text="name" label="Catégories"
 					chips deletable-chips multiple
 					color="accent" item-color="accent">
 				</v-autocomplete>
@@ -71,14 +71,29 @@ export default {
 			descriptionRules: [
 				v => !!v || "Description requise",
 			],
-			items: ['restaurant', 'sport', 'group', 'culture'],
+			tags: [],
 			values: [],
 			link: "",
 			valid: false,
 			display_error: false,
 		}
 	},
+
+	mounted()
+	{
+		this.fetchTags();
+	},
+
 	methods: {
+		fetchTags()
+		{
+			this.$store.dispatch("fetchTags")
+			.then((tags) => {
+				this.tags = Object.values(tags.data).flat();
+				console.log(this.tags);
+			})
+		},
+
 		updateActivity() {
 			// TODO
 		},

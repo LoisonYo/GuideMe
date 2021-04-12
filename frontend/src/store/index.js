@@ -78,6 +78,13 @@ export default new Vuex.Store({
 			return ratings;
 		},
 
+		async fetchTags()
+		{
+			var tags = await axios.get('types/');
+
+			return tags;
+		},
+
 		async createActivity(data)
 		{
 			await axios.post('activities/', {

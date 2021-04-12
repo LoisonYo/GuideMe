@@ -48,14 +48,15 @@ export default {
 			var latitude = parseFloat(values[0]);
 			var longitude = parseFloat(values[1]);
 
-			var intent = await this.$store.dispatch('fetchActivities', {
+			await this.$store.dispatch('fetchActivities', {
 				longitude: longitude,
 				latitude: latitude,
 				radius: this.$route.query.radius,
 			})
-
-			this.activities = Object.values(intent.data).flat();
-			this.loading = false;
+			.then((activities) => {
+				this.activities = Object.values(activities.data).flat();
+				this.loading = false;
+			})		
 		},
 		infiniteScrolling() {
 			setTimeout(() => {
