@@ -35,14 +35,14 @@ class ActivityViewSet(viewsets.ModelViewSet):
     def area(self, request):
         latitude = request.data['latitude']
         longitude = request.data['longitude']
-        radius = request.data['radius']
+        radius = int(request.data['radius']) / 1000
 
         pose = (latitude, longitude)
         activities = Activity.objects.all()
         near = []
         for activity in activities:
             activity_pos = (activity.latitude, activity.longitude)
-            if geopy.distance.vincenty(pose, activity_pos).km <= radius:
+            if geopy.distance.distance(pose, activity_pos).km <= radius:
                 near.append(activity)
 
         serializer = ActivitySerializer(near, context={'request': request}, many=True)
@@ -50,15 +50,6 @@ class ActivityViewSet(viewsets.ModelViewSet):
         return Response({
             'activities': serializer.data,
         })
-
-    @action(detail=False, methods=['post'])
-    def ratings(self, request):
-        id = request.data['id']
-        activity = Activity.objects.get(pk=id)
-        ratings = Rating.objects.filter(activity=activity)
-        serializer = RatingSerializer(ratings, context={'request': request}, many=True)
-        return Response(serializer.data)
-
 
 class TypeViewSet(viewsets.ModelViewSet):
     queryset = Type.objects.all()

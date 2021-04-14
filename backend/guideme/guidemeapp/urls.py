@@ -1,6 +1,8 @@
 from django.urls import include, path
 from . import views
 from rest_framework import routers
+from django.conf import settings
+import os
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)

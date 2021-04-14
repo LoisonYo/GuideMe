@@ -93,13 +93,9 @@ export default new Vuex.Store({
 			return activities;
 		},
 
-		async fetchRatings(context, data)
+		async fetchActivity(context, data)
 		{
-			var ratings = await axios.post('activities/ratings/', {
-				'id': data.activity_id,
-			});
-
-			return ratings;
+			return await axios.get('activities/' + data.id + '/');
 		},
 
 		async fetchTags()

@@ -4,6 +4,7 @@ from django.conf import settings
 
 class Type(models.Model):
     name = models.CharField(max_length=50)
+    icon = models.CharField(max_length=50, default='mdi-border-none-variant')
 
 class Activity(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -17,6 +18,7 @@ class Activity(models.Model):
 
 class Rating(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    activity = models.ForeignKey(Activity, on_delete=models.CASCADE, default=None)
+    date = models.DateField(auto_now=True)
+    activity = models.ForeignKey(Activity, related_name='ratings', on_delete=models.CASCADE, default=None)
     note = models.IntegerField()
     comment = models.TextField()

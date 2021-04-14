@@ -15,17 +15,32 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         user.save()
         return user
 
-class ActivitySerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Activity
-        fields = ['url', 'id', 'creator', 'name', 'description', 'longitude', 'latitude', 'website', 'types', 'image']
-
 class TypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Type
-        fields = ['url', 'name']
+        fields = ['name', 'icon']
 
 class RatingSerializer(serializers.HyperlinkedModelSerializer):
+    creator = UserSerializer(read_only=True)
+
     class Meta:
         model = Rating
-        fields = ['note', 'comment', 'activity', 'creator']
+        fields = ['note', 'date', 'comment', 'creator']
+
+class ActivitySerializer(serializers.HyperlinkedModelSerializer):
+    creator = UserSerializer(read_only=True)
+    types = TypeSerializer(many=True, read_only=True)
+    ratings = RatingSerializer(many=True, read_only=True)
+    note = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Activity
+        fields = ['id', 'creator', 'name', 'description', 'longitude', 'latitude', 'website', 'types', 'image', 'ratings', 'note']
+
+    def get_note(self, objects):
+        notes = set(map(lambda r: r.note, objects.ratings.all()))
+        if len(notes) > 0:
+            note = sum(notes) / len(notes)
+            return format(note, '.1f')
+        else:
+            return 0

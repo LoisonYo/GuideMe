@@ -78,6 +78,7 @@ export default {
 			link: "",
 			valid: false,
 			errors: [],
+			file: null,
 		}
 	},
 
@@ -105,6 +106,7 @@ export default {
 				latitude: this.latitude,
 				website: this.link,
 				tags: this.values,
+				image: this.file,
 			})
 			.then(() => {
 				
@@ -121,8 +123,8 @@ export default {
 		},
 		uploadFiles(e) {
 			if (e.target.files && e.target.files[0]) {
-				const file = e.target.files[0];
-				this.img= URL.createObjectURL(file);
+				this.file = e.target.files[0];
+				this.img= URL.createObjectURL(this.file);
 			}
 		},
 	}
