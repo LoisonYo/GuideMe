@@ -38,25 +38,37 @@ export default {
 			return "https://jsonplaceholder.typicode.com/posts?_page=" + this.page;
 		}
 	},
-	created() {
+	mounted()
+	{
 		this.fetchData();
 	},
 	methods: {
 		async fetchData()
 		{
-			var values = this.$route.query['center'].replace(/\s/g, '').split('(')[1].split(')')[0].split(',');
-			var latitude = parseFloat(values[0]);
-			var longitude = parseFloat(values[1]);
+			var latitude;
+			var longitude;
+
+			if(typeof this.$route.query.center == 'string')
+			{
+				var values = this.$route.query.center.replace(/\s/g, '').split('(')[1].split(')')[0].split(',');
+				latitude = parseFloat(values[0]);
+				longitude = parseFloat(values[1]);
+			}
+			else
+			{
+				latitude = this.$route.query.center.lat;
+				longitude = this.$route.query.center.lng;
+			}
 
 			await this.$store.dispatch('fetchActivities', {
-				longitude: longitude,
 				latitude: latitude,
+				longitude: longitude,
 				radius: this.$route.query.radius,
 			})
 			.then((activities) => {
 				this.activities = Object.values(activities.data).flat();
 				this.loading = false;
-			})		
+			})
 		},
 		infiniteScrolling() {
 			setTimeout(() => {
