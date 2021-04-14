@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('creator', models.IntegerField()),
                 ('name', models.CharField(max_length=200)),
                 ('description', models.TextField()),
-                ('image', models.FilePathField(path=guidemeapp.models.images_path)),
+                ('image', models.FilePathField()),
                 ('longitude', models.DecimalField(decimal_places=5, max_digits=8)),
                 ('latitude', models.DecimalField(decimal_places=5, max_digits=7)),
             ],

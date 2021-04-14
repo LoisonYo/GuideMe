@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 from guidemeapp.serializers import UserSerializer, ActivitySerializer, TypeSerializer, RatingSerializer
 from guidemeapp.models import Activity, Type, Rating 
-from .serializers import *
+import geopy.distance
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -37,8 +37,15 @@ class ActivityViewSet(viewsets.ModelViewSet):
         longitude = request.data['longitude']
         radius = request.data['radius']
 
+        pose = (latitude, longitude)
         activities = Activity.objects.all()
-        serializer = ActivitySerializer(activities, context={'request': request}, many=True)
+        near = []
+        for activity in activities:
+            activity_pos = (activity.latitude, activity.longitude)
+            if geopy.distance.vincenty(pose, activity_pos).km <= radius:
+                near.append(activity)
+
+        serializer = ActivitySerializer(near, context={'request': request}, many=True)
 
         return Response({
             'activities': serializer.data,
