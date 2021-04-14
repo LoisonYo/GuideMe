@@ -43,6 +43,7 @@ export default {
 			display_error: false,
 		}
 	},
+
 	methods: {
 		login()
 		{
@@ -52,7 +53,7 @@ export default {
 			})
 			.then(() => {
 				this.$store.dispatch("fetchAuthUser")
-				this.$router.push({name:"Home"})
+				this.$router.push({name: 'Home'})
 			})
 			.catch(() => {
 				this.display_error = true;

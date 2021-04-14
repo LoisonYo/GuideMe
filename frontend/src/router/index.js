@@ -20,36 +20,51 @@ const routes = [
 		name: "Home",
 		component: Home
 	},
+
 	{
 		path: "/home",
 		redirect: "/"
 	},
+
 	{
 		path: "/login",
 		name: "Login",
-		component: Login
+		component: Login,
+		meta: {
+			requiresVisitor: true,
+		},
 	},
+
 	{
 		path: "/register",
 		name: "Register",
-		component: Register
+		component: Register,
+		meta: {
+			requiresVisitor: true,
+		},
 	},
+
 	{
 		path: "/search",
 		name: "Search",
 		component: Search
 	},
+
 	{
 		path: "/search/results",
 		name: "Results",
 		component: SearchResults
 	},
+
 	{
 		path: "/activity/create",
 		name: "ActivityCreate",
 		component: ActivityCreate,
-		// meta:	{ requiresAuth: true }
+		meta: {
+			requiresAuth: true
+		},
 	},
+
 	{
 		path: "/activity/:id",
 		name: "ActivityDetails",
@@ -94,16 +109,22 @@ const router = new VueRouter({
 
 // Global Before Guards 
 router.beforeEach((to, from, next) => {
-	if (to.matched.some(record => record.meta.requiresAuth)) {
-		// this route requires auth, check if logged in
-		// if not, redirect to login page.
+	if (to.matched.some(record => record.meta.requiresAuth))
+	{
 		if (!store.getters.loggedIn) 
-			next({name: 'login'})
+		{
+			next({name: 'Login'})
+		}
 		else 
 			next()
 	}
-	else {
-		// make sure to always call next()!
+	else if(to.matched.some(record => record.meta.requiresVisitor))
+	{
+		!store.dispatch("logout");
+		next()
+	}
+	else
+	{
 		next() 
 	}
 })
