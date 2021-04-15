@@ -5,7 +5,7 @@
 	class="ma-5 d-flex justify-space-between" 
 	:class="{'primary darken-1 text--darken-4': !$vuetify.theme.dark}">
 		<div>
-			<router-link :to="{ name: 'ActivityDetails', params: { id: activity.id }}" class="secondary--text">link</router-link>
+			<router-link :to="{ name: 'ActivityDetails', params: { id: activity.id, name: activity.name }}" class="secondary--text">link</router-link>
 			<v-card-title
 				class="headline"
 				v-text="activity.name">

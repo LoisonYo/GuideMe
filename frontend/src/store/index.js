@@ -98,6 +98,21 @@ export default new Vuex.Store({
 			return await axios.get('activities/' + data.id + '/');
 		},
 
+		async fetchTag(context, data)
+		{
+			return await axios.get('types/' + data.id + '/');
+		},
+
+		async fetchRating(context, data)
+		{
+			return await axios.get('ratings/' + data.id + '/');
+		},
+
+		async fetchUser(context, data)
+		{
+			return await axios.get('users/' + data.id + '/');
+		},
+
 		async fetchTags()
 		{
 			var tags = await axios.get('types/');
@@ -107,16 +122,19 @@ export default new Vuex.Store({
 
 		async createActivity(context, data)
 		{
-			await axios.post('activities/', {
-				'creator': data.creator,
-				'name': data.name,
-				'description': data.description,
-				'image': data.image,
-				'longitude': data.longitude,
-				'latitude': data.latitude,
-				'website': data.website,
-				'types': data.tags,
-			})
+			const formData = new FormData();
+			formData.append('creator', data.creator)
+			formData.append('name', data.name);
+			formData.append('description', data.description);
+			formData.append('image', data.image);
+			formData.append('longitude', data.longitude);
+			formData.append('latitude', data.latitude);
+			formData.append('website', data.website);
+			formData.append('types', data.tags);
+
+			axios.defaults.headers.common["Authorization"] = "Bearer " + this.state.access_token;
+			var response = await axios.post('activities/', formData)
+			return response
 		},
 
 		async createRating(context, data)

@@ -17,7 +17,7 @@
 			<p class="secondary--text">{{ activity.description }} <br><br> {{ activity.id }}</p>
 
 			<div class="d-flex my-10">
-				<IconCategoryActivity v-for="category in activity.types" :key="category" :name="category.name" :icon="category.icon" class="mr-3"/>	
+				<IconCategoryActivity v-for="category in tags" :key="category" :name="category.name" :icon="category.icon" class="mr-3"/>	
 			</div>
 			
 			<div style="width:100%; text-align: center;">
@@ -29,7 +29,7 @@
 				</a>
 			</div>
 			<v-divider class="my-10 "></v-divider>		
-			<ReviewActivity v-for="rating in activity.ratings" :key="rating" :rating="rating"></ReviewActivity>
+			<ReviewActivity v-for="rating in activity.ratings" :key="rating" :id="rating"></ReviewActivity>
 		</v-sheet>
 		
 	</div>
@@ -50,7 +50,7 @@ export default {
 	data() {
 		return {
 			activity: null,
-			note: 7.3,
+			tags: [],
 		}
 	},
 
@@ -64,12 +64,24 @@ export default {
 		fetchActivity()
 		{
 			this.$store.dispatch('fetchActivity', {
-				id: this.$route.params.id,
+				id: this.id,
 			})
 			.then((activity) => {
 				this.activity = activity.data;
-				console.log(this.activity)
+				this.fetchTags()
 			})
+		},
+
+		fetchTags()
+		{
+			this.activity.types.forEach(element => {
+				this.$store.dispatch('fetchTag', {
+					id: element,
+				})
+				.then((tag) => {
+					this.tags.push(tag.data)
+				})
+			});
 		},
 	}
 }

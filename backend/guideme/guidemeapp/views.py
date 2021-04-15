@@ -28,7 +28,6 @@ class ActivityViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     permission_classes_by_action = {    
         'area': [permissions.AllowAny],
-        'ratings': [permissions.AllowAny],
     }
 
     @action(detail=False, methods=['post'])

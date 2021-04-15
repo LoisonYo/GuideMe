@@ -5,7 +5,7 @@ from rest_framework import serializers
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'id', 'username', 'email', 'password']
+        fields = ['id', 'username', 'email', 'password']
         extra_kwargs = {'password': {'write_only': True}}
     
     def create(self, validated_data):
@@ -18,19 +18,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class TypeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Type
-        fields = ['name', 'icon']
+        fields = ['id', 'name', 'icon']
 
 class RatingSerializer(serializers.HyperlinkedModelSerializer):
-    creator = UserSerializer(read_only=True)
-
+    creator = serializers.PrimaryKeyRelatedField(read_only=False, queryset=User.objects)
+    
     class Meta:
         model = Rating
         fields = ['note', 'date', 'comment', 'creator']
 
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
-    creator = UserSerializer(read_only=True)
-    types = TypeSerializer(many=True, read_only=True)
-    ratings = RatingSerializer(many=True, read_only=True)
+    creator = serializers.PrimaryKeyRelatedField(read_only=False, queryset=User.objects)
+    types = serializers.PrimaryKeyRelatedField(many=True, read_only=False, queryset=Type.objects)
+    ratings = serializers.PrimaryKeyRelatedField(many=True, read_only=False, queryset=Rating.objects)
     note = serializers.SerializerMethodField()
 
     class Meta:
@@ -43,4 +43,4 @@ class ActivitySerializer(serializers.HyperlinkedModelSerializer):
             note = sum(notes) / len(notes)
             return format(note, '.1f')
         else:
-            return 0
+            return 5

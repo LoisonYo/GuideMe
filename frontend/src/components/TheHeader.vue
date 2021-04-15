@@ -35,7 +35,7 @@
 			<template v-slot:append>
 				<v-divider class="mx-2"></v-divider>
 				<div class="pa-2">
-					<div v-if="loggedIn">
+					<div v-if="user">
 						<h4 class="body-1 text-center">{{ user.username }}</h4>
 						<h5 class="caption text-center mb-3">{{ user.email }}</h5>
 						<v-btn @click="logout" block color="primary lighten-2" class="caption">

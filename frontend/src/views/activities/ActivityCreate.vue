@@ -34,7 +34,7 @@
 					color="accent" auto-grow clearable>
 				</v-textarea>
 
-				<v-autocomplete v-model="values" item-value="url" item-text="name" :items="tags" label="Catégories"
+				<v-autocomplete v-model="values" item-value="id" item-text="name" :items="tags" label="Catégories"
 					chips deletable-chips multiple
 					color="accent" item-color="accent">
 				</v-autocomplete>
@@ -98,22 +98,20 @@ export default {
 
 		createActivity()
 		{
+			console.log(this.values)
 			this.$store.dispatch("createActivity", {
-				creator: this.$store.state.user.url,
+				creator: this.$store.state.user.id,
 				name: this.name,
 				description: this.description,
-				longitude: this.longitude,
-				latitude: this.latitude,
+				longitude: 1.0,
+				latitude: 2.0,
 				website: this.link,
 				tags: this.values,
 				image: this.file,
 			})
-			.then(() => {
-				
-			})
-			.catch(errors => {
-				this.errors = errors.response.data;
-			})
+			.then(result => {
+				this.$router.push({name: 'ActivityDetails', params: { name: result.data.name, id: result.data.id }})
+			});
 		},
 
 		resetFiles()
