@@ -81,7 +81,7 @@ export default {
 		return {
 			colorNavIcon: colors.grey.lighten4,
 			drawer: false,
-			myactivity: { text: 'Mes activitées', icon: 'mdi-clipboard-list-outline', route: 'Home' },
+			myactivity: { text: 'Mes activitées', icon: 'mdi-clipboard-list-outline', route: 'MyActivities' },
 			items: [
 				{ text: 'Accueil', icon: 'mdi-home', route: 'Home'},
 				{ text: 'Rechercher', icon: 'mdi-magnify', route: 'Search'},

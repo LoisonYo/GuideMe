@@ -98,6 +98,12 @@ export default new Vuex.Store({
 			return await axios.get('activities/' + data.id + '/');
 		},
 
+		async fetchUserActivities()
+		{
+			axios.defaults.headers.common["Authorization"] = "Bearer " + this.state.access_token;
+			return await axios.get('activities/user');
+		},
+
 		async fetchTag(context, data)
 		{
 			return await axios.get('types/' + data.id + '/');

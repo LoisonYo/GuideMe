@@ -5,6 +5,7 @@ import store from "../store";
 import Home from "../views/Home.vue";
 import Login from "../views/users/Login"
 import Register from "../views/users/Register"
+import MyActivities from "../views/activities/MyActivities"
 import ActivityDetails from "../views/activities/ActivityDetails"
 import ActivityCreate from "../views/activities/ActivityCreate"
 import Search from "../views/activities/Search"
@@ -70,6 +71,16 @@ const routes = [
 		name: "ActivityDetails",
 		component: ActivityDetails,
 		props: true
+	},
+
+	{
+		path: "/myactivities",
+		name: "MyActivities",
+		component: MyActivities,
+		props: true,
+		meta: {
+			requiresAuth: true
+		},
 	},
 	// Comments: ctrl+k+c
 	// Uncomments: ctrl+k+u

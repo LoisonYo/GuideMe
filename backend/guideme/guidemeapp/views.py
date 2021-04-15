@@ -50,6 +50,12 @@ class ActivityViewSet(viewsets.ModelViewSet):
             'activities': serializer.data,
         })
 
+    @action(detail=False, methods=['get'])
+    def user(self, request):
+        activities = Activity.objects.filter(creator=request.user)
+        serializer = ActivitySerializer(activities, context={'request': request}, many=True)
+        return Response({ 'activities': serializer.data })
+
 class TypeViewSet(viewsets.ModelViewSet):
     queryset = Type.objects.all()
     serializer_class = TypeSerializer
