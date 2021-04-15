@@ -1,10 +1,10 @@
 <template>
 	<v-card>
-		<v-card-title>{{ creator.username }}</v-card-title>
-		<v-card-subtitle>{{ rating.date }}</v-card-subtitle>
-		<label>{{ rating.note }}</label>
+		<v-card-title v-if="creator">{{ creator.username }}</v-card-title>
+		<v-card-subtitle>{{ review.date }}</v-card-subtitle>
+		<label>{{ review.note }}</label>
 		<v-card-text>
-			<p>{{ rating.comment }}</p>
+			<p>{{ review.comment }}</p>
 		</v-card-text>
 	</v-card>
 </template>
@@ -12,39 +12,26 @@
 <script>
 export default {
 	name: "ReviewActivity",
-	props: ['id'],
+	props: ['review'],
 
 	data()
 	{
 		return {
-			rating: null,
 			creator: null,
 		}
 	},
 
 	mounted()
 	{
-		this.fetchRating()
+		this.fetchCreator()
 	},
 
 	methods:
 	{
-		fetchRating()
-		{
-			console.log()
-			this.$store.dispatch('fetchRating', {
-				id: this.id,
-			})
-			.then(rating => {
-				this.rating = rating.data
-				this.fetchCreator()
-			})
-		},
-
 		fetchCreator()
 		{
 			this.$store.dispatch('fetchUser', {
-				id: this.rating.creator,
+				id: this.review.creator,
 			})
 			.then((creator) => {
 				this.creator = creator.data

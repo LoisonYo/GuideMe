@@ -104,14 +104,14 @@ export default new Vuex.Store({
 			return await axios.get('activities/user');
 		},
 
-		async fetchTag(context, data)
+		async fetchActivityTags(context, data)
 		{
-			return await axios.get('types/' + data.id + '/');
+			return await axios.get('activities/types/?id=' + data.id);
 		},
 
-		async fetchRating(context, data)
+		async fetchActivityRatings(context, data)
 		{
-			return await axios.get('ratings/' + data.id + '/');
+			return await axios.get('activities/ratings/?id=' + data.id);
 		},
 
 		async fetchUser(context, data)

@@ -1,5 +1,5 @@
 <template>
-	<div style="width:100%; height: 100%;">
+	<div v-if="activity" style="width:100%; height: 100%;">
 		<v-img :src="activity.image"
 			width="100%"
 			height="300"
@@ -17,7 +17,7 @@
 			<p class="secondary--text">{{ activity.description }} <br><br> {{ activity.id }}</p>
 
 			<div class="d-flex my-10">
-				<IconCategoryActivity v-for="category in tags" :key="category" :name="category.name" :icon="category.icon" class="mr-3"/>	
+				<IconCategoryActivity v-for="(category, index) in tags" :key="index" :name="category.name" :icon="category.icon" class="mr-3"/>	
 			</div>
 			
 			<div style="width:100%; text-align: center;">
@@ -28,10 +28,21 @@
 					</v-btn>
 				</a>
 			</div>
+
 			<v-divider class="my-10 "></v-divider>		
-			<ReviewActivity v-for="rating in activity.ratings" :key="rating" :id="rating"></ReviewActivity>
+			<ReviewActivity v-for="(review, index) in reviews" :key="index" :review="review"></ReviewActivity>
+
+			<v-form v-if="canComment" @submit.prevent="createReview" class="text-center">
+				<v-radio-group v-model="note">
+					<v-radio v-for="n in 10" :key="n" :value="n" :label="String(n)"></v-radio>
+				</v-radio-group>
+
+				<v-textarea v-model="review" label="Review" required color="accent" auto-grow clearable>
+				</v-textarea>
+			
+				<v-btn type="submit" rounded color="accent" elevation="0" class="my-8">Envoyer !</v-btn>
+			</v-form>
 		</v-sheet>
-		
 	</div>
 </template>
 
@@ -51,12 +62,30 @@ export default {
 		return {
 			activity: null,
 			tags: [],
+			reviews: [],
+
+			review: "",
+			note: 0,
 		}
 	},
 
 	mounted()
 	{
 		this.fetchActivity();
+	},
+
+	computed:
+	{
+		canComment()
+		{
+			var hasCommented = false;
+			this.reviews.forEach(element => {
+				if(element.creator == this.$store.state.user.id)
+					hasCommented = true;
+			});
+
+			return hasCommented == false && this.activity.creator != this.$store.state.user.id;
+		}
 	},
 
 	methods:
@@ -69,6 +98,7 @@ export default {
 			.then((activity) => {
 				this.activity = activity.data;
 				this.fetchTags()
+				this.fetchReviews()
 			})
 			.catch(() => {
 				this.$router.replace({name:"Search"})
@@ -77,15 +107,36 @@ export default {
 
 		fetchTags()
 		{
-			this.activity.types.forEach(element => {
-				this.$store.dispatch('fetchTag', {
-					id: element,
-				})
-				.then((tag) => {
-					this.tags.push(tag.data)
-				})
+			this.$store.dispatch('fetchActivityTags', {
+				id: this.activity.id,
+			})
+			.then(tags => {
+				this.tags = tags.data.types;
 			});
 		},
+
+		fetchReviews()
+		{
+			this.$store.dispatch('fetchActivityRatings', {
+				id: this.activity.id,
+			})
+			.then(reviews => {
+				this.reviews = reviews.data.ratings;
+			});
+		},
+
+		createReview()
+		{
+			this.$store.dispatch('createRating', {
+				'creator': this.$store.state.user.id,
+				'note': this.note,
+				'comment': this.review,
+				'activity': this.activity.id,
+			})
+			.then(() => {
+				this.fetchActivity();
+			});
+		}
 	}
 }
 </script>

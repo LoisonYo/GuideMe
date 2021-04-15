@@ -56,6 +56,18 @@ class ActivityViewSet(viewsets.ModelViewSet):
         serializer = ActivitySerializer(activities, context={'request': request}, many=True)
         return Response({ 'activities': serializer.data })
 
+    @action(detail=False, methods=['get'])
+    def ratings(self, request):
+        ratings = Rating.objects.filter(activity=request.query_params['id'])
+        serializer = RatingSerializer(ratings, context={'request': request}, many=True)
+        return Response({ 'ratings': serializer.data })
+
+    @action(detail=False, methods=['get'])
+    def types(self, request):
+        types = Type.objects.filter(activity=request.query_params['id'])
+        serializer = TypeSerializer(types, context={'request': request}, many=True)
+        return Response({ 'types': serializer.data })
+
 class TypeViewSet(viewsets.ModelViewSet):
     queryset = Type.objects.all()
     serializer_class = TypeSerializer
