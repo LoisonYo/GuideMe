@@ -32,12 +32,15 @@ export default {
 	{
 		deleteActivity()
 		{
-			this.$store.dispatch("deleteActivity", {
-				id: this.activity.id,
-			})
-			.then(() => {
-				this.$parent.fetchUserActivities()
-			});
+			if (confirm("Voulez-vous vraiment supprimer cette activitée ?"))
+			{
+				this.$store.dispatch("deleteActivity", {
+					id: this.activity.id,
+				})
+				.then(() => {
+					this.$parent.fetchUserActivities()
+				});
+			}
 		}
 	}
 }
