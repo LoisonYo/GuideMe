@@ -66,7 +66,7 @@ export default {
 				radius: this.$route.query.radius,
 			})
 			.then((activities) => {
-				this.activities = Object.values(activities.data).flat();
+				this.activities = activities.data.activities
 				this.loading = false;
 			})
 		},
