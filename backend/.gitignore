@@ -1,36 +1,4 @@
 
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@LoisonYo
-SpicyPaper /
-demo-django-resistance-app
-forked from HE-Arc/demo-django-resistance-app
-
-0
-0
-
-    3
-
-Code
-Pull requests
-Actions
-Projects
-Wiki
-Security
-
-    Insights
-
-demo-django-resistance-app/.gitignore
-@SpicyPaper
-SpicyPaper Update .gitignore
-Latest commit 935bb8d on 5 Jan
-History
-1 contributor
-153 lines (122 sloc) 2.34 KB
-
 # Created by https://www.toptal.com/developers/gitignore/api/django
 # Edit at https://www.toptal.com/developers/gitignore?templates=django
 
@@ -40,6 +8,7 @@ History
 *.pyc
 __pycache__/
 local_settings.py
+guideme.sqlite3
 db.sqlite3
 db.sqlite3-journal
 media
@@ -64,8 +33,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
 parts/
 sdist/
 var/
@@ -138,6 +105,9 @@ ipython_config.py
 #   install all needed dependencies.
 #Pipfile.lock
 
+# poetry
+#poetry.lock
+
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
 __pypackages__/
 
@@ -149,8 +119,9 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
-.venv
+# .env
+.env/
+.venv/
 env/
 venv/
 ENV/
@@ -179,22 +150,16 @@ dmypy.json
 # pytype static type analyzer
 .pytype/
 
+# operating system-related files
+# file properties cache/storage on macOS
+*.DS_Store
+# thumbnail cache on Windows
+Thumbs.db
+
 # profiling data
 .prof
 
+# Images
+guideme/images
+
 # End of https://www.toptal.com/developers/gitignore/api/django
-
-    © 2021 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-
