@@ -152,6 +152,11 @@ export default new Vuex.Store({
 				'comment': data.comment,
 			})
 		},
+
+		async deleteActivity(context, data)
+		{
+			await axios.delete('activities/' + data.id + '/')
+		}
 	},
 	modules: {},
 });

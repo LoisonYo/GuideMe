@@ -4,7 +4,7 @@
 
 		<div class="d-flex flex-column align-center">
 			<div v-for="(value, index) in activities" :key="index" style="width: 100%;">
-				<card-activity class="mx-auto my-2" :activity="value"></card-activity>
+				<card-edit-activity class="mx-auto my-2" :activity="value"></card-edit-activity>
 			</div>
 		</div>
 	</div>
@@ -12,10 +12,10 @@
 
 <script>
 //import axios from "axios";
-import CardActivity from '../../components/activities/CardActivity.vue';
+import CardEditActivity from '../../components/activities/CardEditActivity.vue';
 
 export default {
-  components: { CardActivity },
+  components: { CardEditActivity },
 	name: 'SearchResults',
 	data() {
 		return {
