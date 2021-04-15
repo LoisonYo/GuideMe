@@ -66,7 +66,7 @@ const routes = [
 	},
 
 	{
-		path: "/activity/:name",
+		path: "/activity/:id",
 		name: "ActivityDetails",
 		component: ActivityDetails,
 		props: true

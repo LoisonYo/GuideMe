@@ -103,14 +103,14 @@ export default {
 				creator: this.$store.state.user.id,
 				name: this.name,
 				description: this.description,
-				longitude: 1.0,
-				latitude: 2.0,
+				longitude: this.longitude,
+				latitude: this.latitude,
 				website: this.link,
 				tags: this.values,
 				image: this.file,
 			})
 			.then(result => {
-				this.$router.push({name: 'ActivityDetails', params: { name: result.data.name, id: result.data.id }})
+				this.$router.push({name: 'ActivityDetails', params: { id: result.data.id }})
 			});
 		},
 
