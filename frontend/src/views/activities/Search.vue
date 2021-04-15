@@ -56,6 +56,15 @@ export default {
 			}),
 		}
 	},
+
+	mounted()
+	{
+		this.$nextTick(() => {
+			this.map = this.$refs.map.mapObject // work as expected
+			this.map.zoomControl.remove()
+		});
+	},
+
 	methods: {
 		setPosition(event) {
 			this.center = event.latlng;
@@ -66,12 +75,6 @@ export default {
 		centerUpdate(center) {
 			this.currentCenter = center;
 		},
-	},
-	mounted() {
-		this.$nextTick(() => {
-			this.map = this.$refs.map.mapObject // work as expected
-			this.map.zoomControl.remove()
-		});
 	},
 }
 </script>

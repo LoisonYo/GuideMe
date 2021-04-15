@@ -70,6 +70,9 @@ export default {
 				this.activity = activity.data;
 				this.fetchTags()
 			})
+			.catch(() => {
+				this.$router.replace({name:"Search"})
+			})
 		},
 
 		fetchTags()

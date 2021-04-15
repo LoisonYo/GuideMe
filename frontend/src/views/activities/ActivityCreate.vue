@@ -98,7 +98,6 @@ export default {
 
 		createActivity()
 		{
-			console.log(this.values)
 			this.$store.dispatch("createActivity", {
 				creator: this.$store.state.user.id,
 				name: this.name,
