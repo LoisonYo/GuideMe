@@ -88,8 +88,7 @@ namespace :npm do
     desc 'NPM install dependencies'
     task :install do
         on roles(:web) do |h|
-            execute "cd '#{front_path}'; npm install"
-            execute "touch .env.json" # <= this will create the .evn.json, that the code will detect it
+            execute "cd '#{front_path}'; touch .env.json; npm install"
         end
     end
 
