@@ -9,6 +9,7 @@ class Type(models.Model):
     icon = models.CharField(max_length=50, default='mdi-border-none-variant')
 
 class Activity(models.Model):
+    types = models.ManyToManyField(Type)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     description = models.TextField()
@@ -16,12 +17,11 @@ class Activity(models.Model):
     latitude = models.DecimalField(max_digits=7, decimal_places=5)
     longitude = models.DecimalField(max_digits=8, decimal_places=5)
     website = models.CharField(max_length=200, null=True)
-    types = models.ManyToManyField(Type)
 
 class Rating(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
-    date = models.DateField(auto_now=True)
     activity = models.ForeignKey(Activity, related_name='ratings', on_delete=models.CASCADE, default=None)
+    date = models.DateField(auto_now=True)
     note = models.IntegerField()
     comment = models.TextField()
 

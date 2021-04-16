@@ -87,30 +87,42 @@ export default {
 		this.fetchTags();
 	},
 
-	methods: {
-		fetchTags()
+	methods:
+	{
+		async fetchTags()
 		{
-			this.$store.dispatch("fetchTags")
-			.then((tags) => {
-				this.tags = Object.values(tags.data).flat();
-			})
+			try
+			{
+				var response = await this.$store.dispatch("fetchTags");
+				this.tags = response.data;
+			}
+			catch(error)
+			{
+				//Empty
+			}
 		},
 
-		createActivity()
+		async createActivity()
 		{
-			this.$store.dispatch("createActivity", {
-				creator: this.$store.state.user.id,
-				name: this.name,
-				description: this.description,
-				longitude: 1.2,
-				latitude: 3.4,
-				website: this.link,
-				tags: this.values,
-				image: this.file,
-			})
-			.then(result => {
-				this.$router.replace({name: 'ActivityDetails', params: { id: result.data.id }})
-			});
+			try
+			{
+				var response = await this.$store.dispatch("createActivity", {
+					creator: this.$store.state.user.id,
+					name: this.name,
+					description: this.description,
+					longitude: 1.2,
+					latitude: 3.4,
+					website: this.link,
+					tags: this.values,
+					image: this.file,
+				});
+
+				this.$router.replace({name: 'ActivityDetails', params: { id: response.data.id }})
+			}
+			catch(error)
+			{
+				//Rien
+			}
 		},
 
 		resetFiles()
@@ -118,6 +130,7 @@ export default {
 			this.$refs.inputUpload.value = '';
 			this.img = "";
 		},
+		
 		uploadFiles(e) {
 			if (e.target.files && e.target.files[0]) {
 				this.file = e.target.files[0];

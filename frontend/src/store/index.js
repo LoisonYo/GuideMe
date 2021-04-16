@@ -121,9 +121,7 @@ export default new Vuex.Store({
 
 		async fetchTags()
 		{
-			var tags = await axios.get('types/');
-
-			return tags;
+			return await axios.get('types/');
 		},
 
 		async createActivity(context, data)

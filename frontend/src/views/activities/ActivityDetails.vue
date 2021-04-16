@@ -90,52 +90,73 @@ export default {
 
 	methods:
 	{
-		fetchActivity()
+		async fetchActivity()
 		{
-			this.$store.dispatch('fetchActivity', {
-				id: this.id,
-			})
-			.then((activity) => {
-				this.activity = activity.data;
+			try
+			{
+				var response = await this.$store.dispatch('fetchActivity', {
+					id: this.id,
+				});
+
+				this.activity = response.data;
 				this.fetchTags()
 				this.fetchReviews()
-			})
-			.catch(() => {
+			}
+			catch(error)
+			{
 				this.$router.replace({name:"Search"})
-			})
+			}
 		},
 
-		fetchTags()
+		async fetchTags()
 		{
-			this.$store.dispatch('fetchActivityTags', {
-				id: this.activity.id,
-			})
-			.then(tags => {
-				this.tags = tags.data.types;
-			});
+			try
+			{
+				var response = await this.$store.dispatch('fetchActivityTags', {
+					id: this.activity.id,
+				});
+
+				this.tags = response.data.types;
+			}
+			catch(error)
+			{
+				console.log(error)
+			}
 		},
 
-		fetchReviews()
+		async fetchReviews()
 		{
-			this.$store.dispatch('fetchActivityRatings', {
-				id: this.activity.id,
-			})
-			.then(reviews => {
-				this.reviews = reviews.data.ratings;
-			});
+			try
+			{
+				var response = await this.$store.dispatch('fetchActivityRatings', {
+					id: this.activity.id,
+				});
+
+				this.reviews = response.data.ratings;
+			}
+			catch(error)
+			{
+				console.log(error)
+			}
 		},
 
-		createReview()
+		async createReview()
 		{
-			this.$store.dispatch('createRating', {
-				'creator': this.$store.state.user.id,
-				'note': this.note,
-				'comment': this.review,
-				'activity': this.activity.id,
-			})
-			.then(() => {
+			try
+			{
+				this.$store.dispatch('createRating', {
+					'creator': this.$store.state.user.id,
+					'note': this.note,
+					'comment': this.review,
+					'activity': this.activity.id,
+				});
+
 				this.fetchActivity();
-			});
+			}
+			catch(error)
+			{
+				console.log(error)
+			}
 		}
 	}
 }

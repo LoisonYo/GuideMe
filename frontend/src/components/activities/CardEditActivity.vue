@@ -27,16 +27,22 @@ export default {
 
 	methods:
 	{
-		deleteActivity()
+		async deleteActivity()
 		{
 			if (confirm("Voulez-vous vraiment supprimer cette activitée ?"))
 			{
-				this.$store.dispatch("deleteActivity", {
-					id: this.activity.id,
-				})
-				.then(() => {
-					this.$parent.fetchUserActivities()
-				});
+				try
+				{
+					await this.$store.dispatch("deleteActivity", {
+						id: this.activity.id,
+					});
+
+					this.$parent.fetchUserActivities();
+				}
+				catch(error)
+				{
+					//Rien
+				}
 			}
 		},
 

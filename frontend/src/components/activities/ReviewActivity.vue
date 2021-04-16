@@ -28,14 +28,20 @@ export default {
 
 	methods:
 	{
-		fetchCreator()
+		async fetchCreator()
 		{
-			this.$store.dispatch('fetchUser', {
-				id: this.review.creator,
-			})
-			.then((creator) => {
-				this.creator = creator.data
-			})
+			try
+			{
+				var response = await this.$store.dispatch('fetchUser', {
+					id: this.review.creator,
+				});
+
+				this.creator = response.data;
+			}
+			catch(error)
+			{
+				console.log(error)
+			}
 		}
 	}
 }

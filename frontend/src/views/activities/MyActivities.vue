@@ -37,10 +37,16 @@ export default {
     {
 		async fetchUserActivities()
 		{
-            this.$store.dispatch('fetchUserActivities')
-			.then(activities => {
-				this.activities = activities.data.activities;
-			})
+			try
+			{
+				var response = await this.$store.dispatch('fetchUserActivities')
+				this.activities = response.data.activities;
+			}
+			catch(error)
+			{
+				//Rien
+			}
+            
 		},
 	}
 }

@@ -83,26 +83,38 @@ export default {
 	},
 
 	methods: {
-		fetchActivity()
+		async fetchActivity()
 		{
-			this.$store.dispatch('fetchActivity', {
-				id: this.id,
-			})
-			.then(activity => {
-				this.activity = activity.data;
+			try
+			{
+				var response = await this.$store.dispatch('fetchActivity', {
+					id: this.id,
+				});
+
+				this.activity = response.data;
+
 				if(this.activity.website == 'undefined')
 					this.activity.website = ""
 
 				this.fetchImage()
-			})
+			}
+			catch(error)
+			{
+				//Rien
+			}
 		},
 
-		fetchTags()
+		async fetchTags()
 		{
-			this.$store.dispatch("fetchTags")
-			.then(tags => {
-				this.tags = tags.data;
-			})
+			try
+			{
+				var response = await this.$store.dispatch("fetchTags")
+				this.tags = response.data;
+			}
+			catch(error)
+			{
+				//Rien
+			}
 		},
 
 		async fetchImage()
@@ -114,22 +126,29 @@ export default {
 			this.img = URL.createObjectURL(this.file);
 		},
 
-		updateActivity()
+		async updateActivity()
 		{
-			this.$store.dispatch("updateActivity", {
-				creator: this.$store.state.user.id,
-				id: this.activity.id,
-				name: this.activity.name,
-				description: this.activity.description,
-				longitude: this.activity.longitude,
-				latitude: this.activity.latitude,
-				tags: this.activity.types,
-				website: this.activity.website,
-				image: this.file,
-			})
-			.then(result => {
-				this.$router.replace({name: 'ActivityDetails', params: { id: result.data.id }})
-			});
+			try
+			{
+				var response = await this.$store.dispatch("updateActivity", {
+					creator: this.$store.state.user.id,
+					id: this.activity.id,
+					name: this.activity.name,
+					description: this.activity.description,
+					longitude: this.activity.longitude,
+					latitude: this.activity.latitude,
+					tags: this.activity.types,
+					website: this.activity.website,
+					image: this.file,
+				});
+
+				this.$router.replace({name: 'ActivityDetails', params: { id: response.data.id }})
+			}
+			catch(error)
+			{
+				//Rien
+			}
+			
 		},
 
 		resetFiles()

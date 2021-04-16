@@ -60,16 +60,23 @@ export default {
 				longitude = this.$route.query.center.lng;
 			}
 
-			await this.$store.dispatch('fetchActivities', {
-				latitude: latitude,
-				longitude: longitude,
-				radius: this.$route.query.radius,
-			})
-			.then((activities) => {
-				this.activities = activities.data.activities
+			try
+			{
+				var response = await this.$store.dispatch('fetchActivities', {
+					latitude: latitude,
+					longitude: longitude,
+					radius: this.$route.query.radius,
+				});
+
+				this.activities = response.data.activities;
 				this.loading = false;
-			})
+			}
+			catch(error)
+			{
+				//Rien
+			}
 		},
+		
 		infiniteScrolling() {
 			setTimeout(() => {
 				this.page++;
