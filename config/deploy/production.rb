@@ -110,12 +110,12 @@ after 'python:django_migration', 'npm:install'
 after 'npm:install', 'npm:build'
 
 
-def createJsonFile()
+def createJsonFile
     env_file = {
         "client_id" : "0",
         "client_secret": "0"
     }
-    File.open("/", "w") do |f|
+    File.open("/.env.json", "w") do |f|
         f.write(env_file.to_json)
     end
 end
