@@ -89,6 +89,7 @@ namespace :npm do
     task :install do
         on roles(:web) do |h|
             execute "cd '#{front_path}'; npm install"
+            execute "mv .env.json.example .env.json" # <= this will overwritte the .evn.json.example, that the code will detect it
         end
     end
 
@@ -106,14 +107,3 @@ after 'python:create_venv', 'python:django_config'
 after 'python:django_config', 'python:django_migration'
 after 'python:django_migration', 'npm:install'
 after 'npm:install', 'npm:build'
-
-namespace :frontend do
-    desc 'compile frontend'
-    task :compile do
-        on roles(:web) do |h|
-	        execute "cd #{release_path}/frontend && npm install"
-            execute "mv .env.json.example .env.json"
-            execute "npm run build"
-	    end
-    end
-end
