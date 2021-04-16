@@ -89,7 +89,7 @@ namespace :npm do
     task :install do
         on roles(:web) do |h|
             execute "cd '#{front_path}'; npm install"
-            execute "mv .env.json.example .env.json" # <= this will overwritte the .evn.json.example, that the code will detect it
+            execute "touch .env.json" # <= this will create the .evn.json, that the code will detect it
         end
     end
 
