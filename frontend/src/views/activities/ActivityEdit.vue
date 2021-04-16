@@ -90,6 +90,9 @@ export default {
 			})
 			.then(activity => {
 				this.activity = activity.data;
+				if(this.activity.website == 'undefined')
+					this.activity.website = ""
+
 				this.fetchImage()
 			})
 		},
@@ -121,7 +124,7 @@ export default {
 				longitude: this.activity.longitude,
 				latitude: this.activity.latitude,
 				tags: this.activity.types,
-				website: this.activity.link,
+				website: this.activity.website,
 				image: this.file,
 			})
 			.then(result => {
