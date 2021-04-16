@@ -112,8 +112,8 @@ namespace :frontend do
     task :compile do
         on roles(:web) do |h|
 	        execute "cd #{release_path}/frontend && npm install"
-            execute "mv .env.json.example .env.json"
-            execute "npm run build"
+            	execute "mv .env.json.example .env.json"
+            	execute "npm run build"
 	    end
     end
 end
