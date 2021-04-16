@@ -88,7 +88,8 @@ namespace :npm do
 
     desc 'NPM install dependencies'
     task :install do
-            execute "cd '#{front_path}';"
+        on roles(:web) do
+            execute "cd '#{front_path}"
             createJsonFile()
             execute "npm install"
         end
