@@ -84,13 +84,7 @@ export default new Vuex.Store({
 
 		async fetchActivities(context, data)
 		{
-			var activities = await axios.post('activities/area/', {
-				'longitude': data.longitude,
-				'latitude': data.latitude,
-				'radius': data.radius,
-			});
-			
-			return activities;
+			return await axios.get('activities/area/?latitude=' + data.latitude + '&longitude=' + data.longitude + '&radius=' + data.radius);
 		},
 
 		async fetchActivity(context, data)
