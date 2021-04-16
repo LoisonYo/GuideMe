@@ -6,6 +6,7 @@
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
+require 'json'
 
 server "srvz-webapp.he-arc.ch", user: "poweruser", roles: %w{app db web}, port:1447
 
@@ -87,8 +88,9 @@ namespace :npm do
 
     desc 'NPM install dependencies'
     task :install do
-        on roles(:web) do |h|
-            execute "cd '#{front_path}'; echo \"{\"client_id\":\"0\",\"client_secret\":\"0\"}\" >> .env.json; npm install"
+            execute "cd '#{front_path}';"
+            createJsonFile()
+            execute "npm install"
         end
     end
 
@@ -106,3 +108,14 @@ after 'python:create_venv', 'python:django_config'
 after 'python:django_config', 'python:django_migration'
 after 'python:django_migration', 'npm:install'
 after 'npm:install', 'npm:build'
+
+
+def createJsonFile()
+    env_file = {
+        "client_id" : "0",
+        "client_secret": "0"
+    }
+    File.open("/", "w") do |f|
+        f.write(env_file.to_json)
+    end
+end
