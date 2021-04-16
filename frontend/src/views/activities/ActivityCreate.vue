@@ -109,7 +109,7 @@ export default {
 				image: this.file,
 			})
 			.then(result => {
-				this.$router.push({name: 'ActivityDetails', params: { id: result.data.id }})
+				this.$router.replace({name: 'ActivityDetails', params: { id: result.data.id }})
 			});
 		},
 

@@ -5,16 +5,14 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from guidemeapp.serializers import UserSerializer, ActivitySerializer, TypeSerializer, RatingSerializer
-from guidemeapp.models import Activity, Type, Rating 
+from guidemeapp.models import Activity, Type, Rating
+from guidemeapp.permissions import UserPermission, ActivityPermission, TypePermission, RatingPermission
 import geopy.distance
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [permissions.AllowAny]
-    permission_classes_by_action = {    
-        'auth': [permissions.IsAuthenticated],
-    }
+    permission_classes = [UserPermission]
 
     @action(detail=False, methods=['get'])
     def auth(self, request):
@@ -25,10 +23,7 @@ class UserViewSet(viewsets.ModelViewSet):
 class ActivityViewSet(viewsets.ModelViewSet):
     queryset = Activity.objects.all()
     serializer_class = ActivitySerializer
-    permission_classes = [permissions.AllowAny]
-    permission_classes_by_action = {    
-        'area': [permissions.AllowAny],
-    }
+    permission_classes = [ActivityPermission]
 
     @action(detail=False, methods=['post'])
     def area(self, request):
@@ -71,9 +66,9 @@ class ActivityViewSet(viewsets.ModelViewSet):
 class TypeViewSet(viewsets.ModelViewSet):
     queryset = Type.objects.all()
     serializer_class = TypeSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [TypePermission]
 
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [RatingPermission]
