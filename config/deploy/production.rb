@@ -113,8 +113,8 @@ after 'npm:install', 'npm:build'
 
 def createJsonFile
     env_file = {
-        "client_id" : "0",
-        "client_secret": "0"
+        "client_id" => "0",
+        "client_secret" => "0"
     }
     File.open("/.env.json", "w") do |f|
         f.write(env_file.to_json)
