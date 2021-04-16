@@ -89,9 +89,7 @@ namespace :npm do
     desc 'NPM install dependencies'
     task :install do
         on roles(:web) do
-            execute "cd '#{front_path}'"
-            execute :sudo, createJsonFile()
-            execute "npm install"
+            execute "cd '#{front_path}'; mv .env.json.example .env.json; npm install"
         end
     end
 
@@ -111,12 +109,12 @@ after 'python:django_migration', 'npm:install'
 after 'npm:install', 'npm:build'
 
 
-def createJsonFile
-    env_file = {
-        "client_id" => "0",
-        "client_secret" => "0"
-    }
-    File.open("/.env.json", "w") do |f|
-        f.write(env_file.to_json)
-    end
-end
+# def createJsonFile
+#     env_file = {
+#         "client_id" => "0",
+#         "client_secret" => "0"
+#     }
+#     File.open("/.env.json", "w") do |f|
+#         f.write(env_file.to_json)
+#     end
+# end
