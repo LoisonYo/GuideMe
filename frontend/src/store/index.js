@@ -156,7 +156,22 @@ export default new Vuex.Store({
 		async deleteActivity(context, data)
 		{
 			await axios.delete('activities/' + data.id + '/')
-		}
+		},
+
+		async updateActivity(context, data)
+		{
+			const formData = new FormData();
+			formData.append('creator', data.creator)
+			formData.append('name', data.name);
+			formData.append('description', data.description);
+			formData.append('image', data.image);
+			formData.append('longitude', data.longitude);
+			formData.append('latitude', data.latitude);
+			formData.append('website', data.website);
+			formData.append('types', data.tags);
+
+			return await axios.patch('activities/' + data.id + '/', formData)
+		},
 	},
 	modules: {},
 });

@@ -8,6 +8,7 @@ import Register from "../views/users/Register"
 import MyActivities from "../views/activities/MyActivities"
 import ActivityDetails from "../views/activities/ActivityDetails"
 import ActivityCreate from "../views/activities/ActivityCreate"
+import ActivityEdit from "../views/activities/ActivityEdit"
 import Search from "../views/activities/Search"
 import SearchResults from "../views/activities/SearchResults"
 import NotFound from "../views/NotFound"
@@ -71,6 +72,16 @@ const routes = [
 		name: "ActivityDetails",
 		component: ActivityDetails,
 		props: true
+	},
+
+	{
+		path: "/activity/edit/:id",
+		name: "ActivityEdit",
+		component: ActivityEdit,
+		props: true,
+		meta: {
+			requiresAuth: true
+		},
 	},
 
 	{

@@ -12,7 +12,7 @@
 			</v-card-title>
 			<v-card-subtitle>{{activity.note}}</v-card-subtitle>
 		</div>		
-			<v-btn>Modifier</v-btn>
+			<v-btn @click="updateActivity">Modifier</v-btn>
 			<v-btn @click="deleteActivity">Supprimer</v-btn>
 		</div>
 	</v-card>
@@ -41,7 +41,12 @@ export default {
 					this.$parent.fetchUserActivities()
 				});
 			}
-		}
+		},
+
+		updateActivity()
+		{
+			this.$router.push({name: 'ActivityEdit', params: { id: this.activity.id }})
+		},
 	}
 }
 </script>
