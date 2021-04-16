@@ -88,7 +88,7 @@ namespace :npm do
     desc 'NPM install dependencies'
     task :install do
         on roles(:web) do |h|
-            execute "cd '#{front_path}'; touch .env.json; npm install"
+            execute "cd '#{front_path}'; echo \"{\"client_id\":\"0\",\"client_secret\":\"0\"}\" >> .env.json; npm install"
         end
     end
 
