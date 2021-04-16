@@ -29,9 +29,9 @@ namespace :python do
     desc 'Create venv'
     task :create_venv do
         on roles([:app, :web]) do |h|
-	    execute "python3 -m venv #{venv_path}"
+	        execute "python3 -m venv #{venv_path}"
             execute "source #{venv_path}/bin/activate"
-	    execute "#{venv_path}/bin/pip install -r #{release_path}/backend/requirements.txt"
+	        execute "#{venv_path}/bin/pip install -r #{release_path}/backend/requirements.txt"
         end
     end
 
@@ -90,7 +90,7 @@ namespace :npm do
     task :install do
         on roles(:web) do
             execute "cd '#{front_path}'"
-            createJsonFile()
+            execute :sudo, createJsonFile()
             execute "npm install"
         end
     end
