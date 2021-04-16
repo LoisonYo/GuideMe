@@ -20,7 +20,7 @@
 				<IconCategoryActivity v-for="(category, index) in tags" :key="index" :name="category.name" :icon="category.icon" class="mr-3"/>	
 			</div>
 			
-			<div style="width:100%; text-align: center;">
+			<div v-if="activity.website" style="width:100%; text-align: center;">
 				<a :href="activity.website">
 					<v-btn rounded color="accent" elevation="0">
 						<v-icon left>mdi-link-variant</v-icon>
