@@ -14,7 +14,7 @@
 					<p class="ma-n2 body-2 secondary--text text--darken-2">sur 10</p>
 				</div>
 			</div>
-			<p class="secondary--text">{{ activity.description }} <br><br> {{ activity.id }}</p>
+			<p class="secondary--text" style="text-align: justify">{{ activity.description }}</p>
 
 			<div class="d-flex my-10">
 				<IconCategoryActivity v-for="(category, index) in tags" :key="index" :name="category.name" :icon="category.icon" class="mr-3"/>	
