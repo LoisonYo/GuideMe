@@ -57,6 +57,9 @@ class Rating(models.Model):
     note = models.IntegerField()
     comment = models.TextField()
 
+    class Meta:
+        unique_together = ('creator', 'activity',)
+
 
 # Méthode permettant de supprimer automatique l'image d'une activité supprimée
 @receiver(models.signals.post_delete, sender= Activity)
