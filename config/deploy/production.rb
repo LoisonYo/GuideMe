@@ -107,15 +107,6 @@ after 'python:django_config', 'python:django_migration'
 after 'python:django_migration', 'npm:install'
 after 'npm:install', 'npm:build'
 
-
-
-
-
-
-
-
-
-
 namespace :frontend do
     desc 'compile frontend'
     task :compile do
