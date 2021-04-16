@@ -145,6 +145,21 @@ export default new Vuex.Store({
 			})
 		},
 
+		async updateRating(context, data)
+		{
+			await axios.patch('ratings/' + data.id + '/', {
+				'activity': data.activity,
+				'creator': data.creator,
+				'note': data.note,
+				'comment': data.comment,
+			})
+		},
+
+		async deleteRating(context, data)
+		{
+			await axios.delete('ratings/' + data.id + '/')
+		},
+
 		async deleteActivity(context, data)
 		{
 			await axios.delete('activities/' + data.id + '/')

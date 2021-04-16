@@ -26,7 +26,7 @@ class RatingSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:
         model = Rating
-        fields = ['note', 'date', 'comment', 'creator', 'activity']
+        fields = ['id', 'note', 'date', 'comment', 'creator', 'activity']
 
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
     creator = serializers.PrimaryKeyRelatedField(read_only=False, queryset=User.objects)

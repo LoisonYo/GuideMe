@@ -29,19 +29,9 @@
 				</a>
 			</div>
 
-			<v-divider class="my-10 "></v-divider>		
+			<v-divider class="my-10 "></v-divider>
+			<ReviewEditor :activity_id="activity.id" :current_review="current_review"></ReviewEditor>		
 			<ReviewActivity v-for="(review, index) in reviews" :key="index" :review="review"></ReviewActivity>
-
-			<v-form v-if="canComment" @submit.prevent="createReview" class="text-center">
-				<v-radio-group v-model="note">
-					<v-radio v-for="n in 10" :key="n" :value="n" :label="String(n)"></v-radio>
-				</v-radio-group>
-
-				<v-textarea v-model="review" label="Review" required color="accent" auto-grow clearable>
-				</v-textarea>
-			
-				<v-btn type="submit" rounded color="accent" elevation="0" class="my-8">Envoyer !</v-btn>
-			</v-form>
 		</v-sheet>
 	</div>
 </template>
@@ -49,11 +39,13 @@
 <script>
 import IconCategoryActivity from '@/components/activities/IconCategoryActivity.vue'
 import ReviewActivity from '@/components/activities/ReviewActivity.vue'
+import ReviewEditor from '@/components/activities/ReviewEditor.vue'
 
 export default {
 	components: { 
 		IconCategoryActivity,
-		ReviewActivity 
+		ReviewActivity,
+		ReviewEditor,
 	},
 	name: "ActivityDetails",
 	props: ['id'],
@@ -64,28 +56,13 @@ export default {
 			tags: [],
 			reviews: [],
 
-			review: "",
-			note: 0,
+			current_review: undefined,
 		}
 	},
 
 	mounted()
 	{
 		this.fetchActivity();
-	},
-
-	computed:
-	{
-		canComment()
-		{
-			var hasCommented = false;
-			this.reviews.forEach(element => {
-				if(element.creator == this.$store.state.user.id)
-					hasCommented = true;
-			});
-
-			return hasCommented == false && this.activity.creator != this.$store.state.user.id;
-		}
 	},
 
 	methods:
@@ -133,31 +110,21 @@ export default {
 				});
 
 				this.reviews = response.data.ratings;
+
+				if(this.$store.getters.loggedIn)
+				{
+					this.reviews.forEach(element => {
+						if(element.creator == this.$store.state.user.id)
+							this.current_review = element;
+					});
+				}
+				
 			}
 			catch(error)
 			{
 				console.log(error)
 			}
 		},
-
-		async createReview()
-		{
-			try
-			{
-				this.$store.dispatch('createRating', {
-					'creator': this.$store.state.user.id,
-					'note': this.note,
-					'comment': this.review,
-					'activity': this.activity.id,
-				});
-
-				this.fetchActivity();
-			}
-			catch(error)
-			{
-				console.log(error)
-			}
-		}
 	}
 }
 </script>
