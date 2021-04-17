@@ -45,6 +45,8 @@
 					color="accent">
 				</v-text-field>
 
+				<PositionField v-model="activity" style="margin-top: 70px"></PositionField>
+
 				<ul class="warning--text body-2 mb-0 mt-8">
 					<li v-for="(value, index) in errors" :key="index">{{ index }} : {{ value }}</li>
 				</ul>
@@ -60,13 +62,20 @@
 </template>
 
 <script>
+import PositionField from '@/components/activities/PositionField.vue'
+
 export default {
+	components:
+	{
+		PositionField,
+	},
+
 	name: "ActivityEdit",
 	props: ['id'],
 	data() {
 		return {
 			img: '',
-			activity: null,
+			activity: Object(),
 			nameRules: [ v => !!v || "Nom requis" ],
 			descriptionRules: [ v => !!v || "Description requise" ],
 			tags: [],
@@ -146,7 +155,7 @@ export default {
 			}
 			catch(error)
 			{
-				//Rien
+				this.errors = error.response.data;
 			}
 			
 		},

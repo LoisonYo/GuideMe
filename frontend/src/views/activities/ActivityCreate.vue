@@ -45,8 +45,7 @@
 					color="accent">
 				</v-text-field>
 
-				<v-text-field v-model="activity.latitude" label="Latitude"></v-text-field>
-				<v-text-field v-model="activity.longitude" label="Longitude"></v-text-field>
+				<PositionField v-model="activity" style="margin-top: 70px"></PositionField>
 
 				<ul class="warning--text body-2 mb-0 mt-8">
 					<li v-for="(value, index) in errors" :key="index">{{ index }} : {{ value }}</li>
@@ -63,8 +62,14 @@
 </template>
 
 <script>
+import PositionField from '@/components/activities/PositionField.vue'
 
 export default {
+	components:
+	{
+		PositionField,
+	},
+
 	name: "ActivityCreate",
 	data() {
 		return {
@@ -75,8 +80,8 @@ export default {
 				description: "",
 				tags: [],
 				website: "",
-				latitude: "",
-				longitude: "",
+				latitude: 47.053011,
+				longitude: 7.067925,
 				image: null,
 			},
 
@@ -88,7 +93,6 @@ export default {
 				v => !!v || "Description requise",
 			],
 			tags: [],
-			values: [],
 			valid: false,
 			errors: [],
 		}
