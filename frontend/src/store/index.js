@@ -108,6 +108,11 @@ export default new Vuex.Store({
 			return await axios.get('activities/ratings/?id=' + data.id);
 		},
 
+		async fetchUserRatings()
+		{
+			return await axios.get('ratings/user');
+		},
+
 		async fetchUser(context, data)
 		{
 			return await axios.get('users/' + data.id + '/');
