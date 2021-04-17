@@ -19,7 +19,7 @@
 			<div class="d-flex my-10">
 				<IconCategoryActivity v-for="(category, index) in tags" :key="index" :name="category.name" :icon="category.icon" class="mr-3"/>	
 			</div>
-			
+
 			<div v-if="activity.website" style="width:100%; text-align: center;">
 				<a :href="activity.website">
 					<v-btn rounded color="accent" elevation="0">
@@ -29,6 +29,8 @@
 				</a>
 			</div>
 
+			<PositionViewer v-model="activity" style="margin: 50px 10px"></PositionViewer>
+			
 			<v-divider class="my-10 "></v-divider>
 			<ReviewEditor :activity_id="activity.id" :current_review="current_review"></ReviewEditor>		
 			<ReviewActivity v-for="(review, index) in reviews" :key="index" :review="review"></ReviewActivity>
@@ -40,19 +42,21 @@
 import IconCategoryActivity from '@/components/activities/IconCategoryActivity.vue'
 import ReviewActivity from '@/components/activities/ReviewActivity.vue'
 import ReviewEditor from '@/components/activities/ReviewEditor.vue'
+import PositionViewer from '@/components/activities/PositionViewer.vue'
 
 export default {
 	components: { 
 		IconCategoryActivity,
 		ReviewActivity,
 		ReviewEditor,
+		PositionViewer,
 	},
 	name: "ActivityDetails",
 	props: ['id'],
 
 	data() {
 		return {
-			activity: null,
+			activity: Object(),
 			tags: [],
 			reviews: [],
 

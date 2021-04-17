@@ -1,7 +1,7 @@
 <template>
 	<v-card elevation="0"
 	max-width="400px"
-	color="primary lighten-2" 
+	color="primary lighten-1"
 	:class="{'primary darken-1 text--darken-4': !$vuetify.theme.dark}">
 		<div>
 			<CardActivity class="ma-0" :activity="activity"></CardActivity>

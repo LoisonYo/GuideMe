@@ -4,7 +4,7 @@
 
 		<div class="d-flex flex-column align-center" style="margin-top: 50px">
 			<div v-for="(value, index) in activities" :key="index" style="width: 100%;">
-				<card-edit-activity class="mx-auto my-2" :activity="value"></card-edit-activity>
+				<card-edit-activity class="mx-auto my-4" :activity="value"></card-edit-activity>
 			</div>
 		</div>
 	</div>
