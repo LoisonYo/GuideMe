@@ -6,6 +6,7 @@
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
+require 'json'
 
 server "srvz-webapp.he-arc.ch", user: "poweruser", roles: %w{app db web}, port:1447
 
@@ -28,9 +29,9 @@ namespace :python do
     desc 'Create venv'
     task :create_venv do
         on roles([:app, :web]) do |h|
-	    execute "python3 -m venv #{venv_path}"
+	        execute "python3 -m venv #{venv_path}"
             execute "source #{venv_path}/bin/activate"
-	    execute "#{venv_path}/bin/pip install -r #{release_path}/backend/requirements.txt"
+	        execute "#{venv_path}/bin/pip install -r #{release_path}/backend/requirements.txt"
         end
     end
 
@@ -87,8 +88,8 @@ namespace :npm do
 
     desc 'NPM install dependencies'
     task :install do
-        on roles(:web) do |h|
-            execute "cd '#{front_path}'; npm install"
+        on roles(:web) do
+            execute "cd '#{front_path}'; mv .env.json.example .env.json; npm install"
         end
     end
 
@@ -108,19 +109,12 @@ after 'python:django_migration', 'npm:install'
 after 'npm:install', 'npm:build'
 
 
-
-
-
-
-
-
-
-
-namespace :frontend do
-    desc 'compile frontend'
-    task :compile do
-        on roles(:web) do |h|
-	        execute "cd #{release_path}/frontend && npm install && npm run build"
-	    end
-    end
-end
+# def createJsonFile
+#     env_file = {
+#         "client_id" => "0",
+#         "client_secret" => "0"
+#     }
+#     File.open("/.env.json", "w") do |f|
+#         f.write(env_file.to_json)
+#     end
+# end
