@@ -24,26 +24,29 @@
 			</h2>
 
 			<v-form @submit.prevent="createActivity" v-model="valid" class="text-center">
-				<v-text-field v-model="name" label="Nom" 
+				<v-text-field v-model="activity.name" label="Nom" 
 					:rules="nameRules" required 
 					color="accent" clearable>
 				</v-text-field>
 
-				<v-textarea v-model="description" label="Description"
+				<v-textarea v-model="activity.description" label="Description"
 					:rules="descriptionRules" required 				
 					color="accent" auto-grow clearable>
 				</v-textarea>
 
-				<v-autocomplete v-model="values" item-value="id" item-text="name" :items="tags" label="Catégories"
+				<v-autocomplete v-model="activity.tags" item-value="id" item-text="name" :items="tags" label="Catégories"
 					chips deletable-chips multiple
 					color="accent" item-color="accent">
 				</v-autocomplete>
 
-				<v-text-field v-model="link" label="Lien (facultatif)" 
+				<v-text-field v-model="activity.website" label="Lien (facultatif)" 
 					prepend-inner-icon="mdi-link-variant"
 					hint="www.example.com/page" persistent-hint 
 					color="accent">
 				</v-text-field>
+
+				<v-text-field v-model="activity.latitude" label="Latitude"></v-text-field>
+				<v-text-field v-model="activity.longitude" label="Longitude"></v-text-field>
 
 				<ul class="warning--text body-2 mb-0 mt-8">
 					<li v-for="(value, index) in errors" :key="index">{{ index }} : {{ value }}</li>
@@ -60,25 +63,34 @@
 </template>
 
 <script>
+
 export default {
 	name: "ActivityCreate",
 	data() {
 		return {
+
+			activity:
+			{
+				name: "",
+				description: "",
+				tags: [],
+				website: "",
+				latitude: "",
+				longitude: "",
+				image: null,
+			},
+
 			img: "",
-			name: "",
 			nameRules: [
 				v => !!v || "Nom requis",
 			],
-			description: "",
 			descriptionRules: [
 				v => !!v || "Description requise",
 			],
 			tags: [],
 			values: [],
-			link: "",
 			valid: false,
 			errors: [],
-			file: null,
 		}
 	},
 
@@ -108,33 +120,34 @@ export default {
 			{
 				var response = await this.$store.dispatch("createActivity", {
 					creator: this.$store.state.user.id,
-					name: this.name,
-					description: this.description,
-					longitude: 1.2,
-					latitude: 3.4,
-					website: this.link,
-					tags: this.values,
-					image: this.file,
+					name: this.activity.name,
+					description: this.activity.description,
+					longitude: this.activity.longitude,
+					latitude: this.activity.latitude,
+					website: this.activity.website,
+					tags: this.activity.tags,
+					image: this.activity.image,
 				});
 
 				this.$router.replace({name: 'ActivityDetails', params: { id: response.data.id }})
 			}
 			catch(error)
 			{
-				//Rien
+				this.errors = error.response.data;
 			}
 		},
 
 		resetFiles()
 		{
+			this.activity.image = null;
 			this.$refs.inputUpload.value = '';
 			this.img = "";
 		},
 		
 		uploadFiles(e) {
 			if (e.target.files && e.target.files[0]) {
-				this.file = e.target.files[0];
-				this.img= URL.createObjectURL(this.file);
+				this.activity.image = e.target.files[0];
+				this.img= URL.createObjectURL(this.activity.image);
 			}
 		},
 	}
