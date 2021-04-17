@@ -29,7 +29,7 @@
 				</a>
 			</div>
 
-			<PositionViewer v-model="activity" style="margin: 50px 10px"></PositionViewer>
+			<PositionViewer v-model="activity" style="margin: 50px auto; max-width: 600px"></PositionViewer>
 			
 			<v-divider class="my-10 "></v-divider>
 			<ReviewEditor :activity_id="activity.id" :current_review="current_review"></ReviewEditor>		
