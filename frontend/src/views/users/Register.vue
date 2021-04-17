@@ -70,20 +70,23 @@ export default {
 		}
 	},
 	methods: {
-		register()
+		async register()
 		{
-			this.$store.dispatch("register", {
-				name: this.name,
-				email: this.email,
-				password: this.password,
-				password_confirmation: this.confirmPassword,
-			})
-			.then(() => {
+			try
+			{
+				await this.$store.dispatch("register", {
+					name: this.name,
+					email: this.email,
+					password: this.password,
+					password_confirmation: this.confirmPassword,
+				})
+
 				this.$router.push({name:"Login"})
-			})
-			.catch(error => {
+			}
+			catch(error)
+			{
 				this.errors = Object.values(error.response.data).flat();
-			})
+			}
 		},
 	}
 }

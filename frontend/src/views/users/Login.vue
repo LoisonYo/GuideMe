@@ -45,19 +45,22 @@ export default {
 	},
 
 	methods: {
-		login()
+		async login()
 		{
-			this.$store.dispatch("login", {
-				username: this.name,
-				password: this.password,
-			})
-			.then(() => {
-				this.$store.dispatch("fetchAuthUser")
+			try
+			{
+				await this.$store.dispatch("login", {
+					username: this.name,
+					password: this.password,
+				});
+				
+				await this.$store.dispatch("fetchAuthUser")
 				this.$router.push({name: 'Home'})
-			})
-			.catch(() => {
+			}
+			catch
+			{
 				this.display_error = true;
-			})
+			}
 		}
 	}
 }

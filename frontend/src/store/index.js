@@ -84,13 +84,7 @@ export default new Vuex.Store({
 
 		async fetchActivities(context, data)
 		{
-			var activities = await axios.post('activities/area/', {
-				'longitude': data.longitude,
-				'latitude': data.latitude,
-				'radius': data.radius,
-			});
-			
-			return activities;
+			return await axios.get('activities/area/?latitude=' + data.latitude + '&longitude=' + data.longitude + '&radius=' + data.radius);
 		},
 
 		async fetchActivity(context, data)
@@ -104,14 +98,19 @@ export default new Vuex.Store({
 			return await axios.get('activities/user');
 		},
 
-		async fetchTag(context, data)
+		async fetchActivityTags(context, data)
 		{
-			return await axios.get('types/' + data.id + '/');
+			return await axios.get('activities/types/?id=' + data.id);
 		},
 
-		async fetchRating(context, data)
+		async fetchActivityRatings(context, data)
 		{
-			return await axios.get('ratings/' + data.id + '/');
+			return await axios.get('activities/ratings/?id=' + data.id);
+		},
+
+		async fetchUserRatings()
+		{
+			return await axios.get('ratings/user');
 		},
 
 		async fetchUser(context, data)
@@ -121,9 +120,7 @@ export default new Vuex.Store({
 
 		async fetchTags()
 		{
-			var tags = await axios.get('types/');
-
-			return tags;
+			return await axios.get('types/');
 		},
 
 		async createActivity(context, data)
@@ -153,10 +150,40 @@ export default new Vuex.Store({
 			})
 		},
 
+		async updateRating(context, data)
+		{
+			await axios.patch('ratings/' + data.id + '/', {
+				'activity': data.activity,
+				'creator': data.creator,
+				'note': data.note,
+				'comment': data.comment,
+			})
+		},
+
+		async deleteRating(context, data)
+		{
+			await axios.delete('ratings/' + data.id + '/')
+		},
+
 		async deleteActivity(context, data)
 		{
 			await axios.delete('activities/' + data.id + '/')
-		}
+		},
+
+		async updateActivity(context, data)
+		{
+			const formData = new FormData();
+			formData.append('creator', data.creator)
+			formData.append('name', data.name);
+			formData.append('description', data.description);
+			formData.append('image', data.image);
+			formData.append('longitude', data.longitude);
+			formData.append('latitude', data.latitude);
+			formData.append('website', data.website);
+			formData.append('types', data.tags);
+
+			return await axios.patch('activities/' + data.id + '/', formData)
+		},
 	},
 	modules: {},
 });

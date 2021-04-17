@@ -1,5 +1,5 @@
 <template>
-	<div style="width:100%; height: 100%;">
+	<div v-if="activity" style="width:100%; height: 100%;">
 		
 		<v-img :src="img" alt="image uploaded" 
 			height="300" width="100%"
@@ -20,10 +20,10 @@
 		<v-sheet color="primary" class="pa-8 rounded-t-xl" style="height: calc(100% - 280px);">
 			<v-sheet max-width="600px" class="transparent mx-auto">
 			<h2 class="text-center mb-8 headline secondary--text">
-				Ajouter une activité
+				Modifier une activité
 			</h2>
 
-			<v-form @submit.prevent="createActivity" v-model="valid" class="text-center">
+			<v-form @submit.prevent="updateActivity" v-model="valid" class="text-center">
 				<v-text-field v-model="activity.name" label="Nom" 
 					:rules="nameRules" required 
 					color="accent" clearable>
@@ -34,7 +34,7 @@
 					color="accent" auto-grow clearable>
 				</v-textarea>
 
-				<v-autocomplete v-model="activity.tags" item-value="id" item-text="name" :items="tags" label="Catégories"
+				<v-autocomplete v-model="activity.types" item-value="id" item-text="name" :items="tags" label="Catégories"
 					chips deletable-chips multiple
 					color="accent" item-color="accent">
 				</v-autocomplete>
@@ -70,67 +70,85 @@ export default {
 		PositionField,
 	},
 
-	name: "ActivityCreate",
+	name: "ActivityEdit",
+	props: ['id'],
 	data() {
 		return {
-
-			activity:
-			{
-				name: "",
-				description: "",
-				tags: [],
-				website: "",
-				latitude: 47.053011,
-				longitude: 7.067925,
-				image: null,
-			},
-
-			img: "",
-			nameRules: [
-				v => !!v || "Nom requis",
-			],
-			descriptionRules: [
-				v => !!v || "Description requise",
-			],
+			img: '',
+			activity: Object(),
+			nameRules: [ v => !!v || "Nom requis" ],
+			descriptionRules: [ v => !!v || "Description requise" ],
 			tags: [],
 			valid: false,
 			errors: [],
+			file: null,
 		}
 	},
 
 	mounted()
 	{
 		this.fetchTags();
+		this.fetchActivity();
 	},
 
-	methods:
-	{
+	methods: {
+		async fetchActivity()
+		{
+			try
+			{
+				var response = await this.$store.dispatch('fetchActivity', {
+					id: this.id,
+				});
+
+				this.activity = response.data;
+
+				if(this.activity.website == 'undefined')
+					this.activity.website = ""
+
+				this.fetchImage()
+			}
+			catch(error)
+			{
+				//Rien
+			}
+		},
+
 		async fetchTags()
 		{
 			try
 			{
-				var response = await this.$store.dispatch("fetchTags");
+				var response = await this.$store.dispatch("fetchTags")
 				this.tags = response.data;
 			}
 			catch(error)
 			{
-				//Empty
+				//Rien
 			}
 		},
 
-		async createActivity()
+		async fetchImage()
+		{
+			const name = this.activity.image.split('/').pop();
+			const response = await fetch(this.activity.image);
+			const blob = await response.blob();
+			this.file = new File([blob], name, {type: blob.type});
+			this.img = URL.createObjectURL(this.file);
+		},
+
+		async updateActivity()
 		{
 			try
 			{
-				var response = await this.$store.dispatch("createActivity", {
+				var response = await this.$store.dispatch("updateActivity", {
 					creator: this.$store.state.user.id,
+					id: this.activity.id,
 					name: this.activity.name,
 					description: this.activity.description,
 					longitude: this.activity.longitude,
 					latitude: this.activity.latitude,
+					tags: this.activity.types,
 					website: this.activity.website,
-					tags: this.activity.tags,
-					image: this.activity.image,
+					image: this.file,
 				});
 
 				this.$router.replace({name: 'ActivityDetails', params: { id: response.data.id }})
@@ -139,19 +157,19 @@ export default {
 			{
 				this.errors = error.response.data;
 			}
+			
 		},
 
 		resetFiles()
 		{
-			this.activity.image = null;
 			this.$refs.inputUpload.value = '';
 			this.img = "";
 		},
-		
+
 		uploadFiles(e) {
 			if (e.target.files && e.target.files[0]) {
-				this.activity.image = e.target.files[0];
-				this.img= URL.createObjectURL(this.activity.image);
+				this.file = e.target.files[0];
+				this.img= URL.createObjectURL(this.file);
 			}
 		},
 	}

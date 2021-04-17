@@ -2,7 +2,7 @@
 	<div class="primary pt-15 pb-10 px-7" style="width: 100%; height: 100%;">
 		<h1>Résultats</h1>
 
-		<div class="d-flex flex-column align-center">
+		<div class="d-flex flex-column align-center" style="margin-top: 50px">
 			<div v-for="(value, index) in activities" :key="index" style="width: 100%;">
 				<card-activity class="mx-auto my-2" :activity="value"></card-activity>
 			</div>
@@ -60,16 +60,23 @@ export default {
 				longitude = this.$route.query.center.lng;
 			}
 
-			await this.$store.dispatch('fetchActivities', {
-				latitude: latitude,
-				longitude: longitude,
-				radius: this.$route.query.radius,
-			})
-			.then((activities) => {
-				this.activities = activities.data.activities
+			try
+			{
+				var response = await this.$store.dispatch('fetchActivities', {
+					latitude: latitude,
+					longitude: longitude,
+					radius: this.$route.query.radius,
+				});
+
+				this.activities = response.data.activities;
 				this.loading = false;
-			})
+			}
+			catch(error)
+			{
+				//Rien
+			}
 		},
+		
 		infiniteScrolling() {
 			setTimeout(() => {
 				this.page++;

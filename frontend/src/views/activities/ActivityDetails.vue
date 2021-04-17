@@ -1,5 +1,5 @@
 <template>
-	<div style="width:100%; height: 100%;">
+	<div v-if="activity" style="width:100%; height: 100%;">
 		<v-img :src="activity.image"
 			width="100%"
 			height="300"
@@ -14,13 +14,13 @@
 					<p class="ma-n2 body-2 secondary--text text--darken-2">sur 10</p>
 				</div>
 			</div>
-			<p class="secondary--text">{{ activity.description }} <br><br> {{ activity.id }}</p>
+			<p class="secondary--text" style="text-align: justify">{{ activity.description }}</p>
 
 			<div class="d-flex my-10">
-				<IconCategoryActivity v-for="category in tags" :key="category" :name="category.name" :icon="category.icon" class="mr-3"/>	
+				<IconCategoryActivity v-for="(category, index) in tags" :key="index" :name="category.name" :icon="category.icon" class="mr-3"/>	
 			</div>
-			
-			<div style="width:100%; text-align: center;">
+
+			<div v-if="activity.website" style="width:100%; text-align: center;">
 				<a :href="activity.website">
 					<v-btn rounded color="accent" elevation="0">
 						<v-icon left>mdi-link-variant</v-icon>
@@ -28,29 +28,39 @@
 					</v-btn>
 				</a>
 			</div>
-			<v-divider class="my-10 "></v-divider>		
-			<ReviewActivity v-for="rating in activity.ratings" :key="rating" :id="rating"></ReviewActivity>
+
+			<PositionViewer v-model="activity" style="margin: 50px auto; max-width: 600px"></PositionViewer>
+			
+			<v-divider class="my-10 "></v-divider>
+			<ReviewEditor :activity_id="activity.id" :current_review="current_review"></ReviewEditor>		
+			<ReviewActivity v-for="(review, index) in reviews" :key="index" :review="review"></ReviewActivity>
 		</v-sheet>
-		
 	</div>
 </template>
 
 <script>
 import IconCategoryActivity from '@/components/activities/IconCategoryActivity.vue'
 import ReviewActivity from '@/components/activities/ReviewActivity.vue'
+import ReviewEditor from '@/components/activities/ReviewEditor.vue'
+import PositionViewer from '@/components/activities/PositionViewer.vue'
 
 export default {
 	components: { 
 		IconCategoryActivity,
-		ReviewActivity 
+		ReviewActivity,
+		ReviewEditor,
+		PositionViewer,
 	},
 	name: "ActivityDetails",
 	props: ['id'],
 
 	data() {
 		return {
-			activity: null,
+			activity: Object(),
 			tags: [],
+			reviews: [],
+
+			current_review: undefined,
 		}
 	},
 
@@ -61,30 +71,63 @@ export default {
 
 	methods:
 	{
-		fetchActivity()
+		async fetchActivity()
 		{
-			this.$store.dispatch('fetchActivity', {
-				id: this.id,
-			})
-			.then((activity) => {
-				this.activity = activity.data;
+			try
+			{
+				var response = await this.$store.dispatch('fetchActivity', {
+					id: this.id,
+				});
+
+				this.activity = response.data;
 				this.fetchTags()
-			})
-			.catch(() => {
+				this.fetchReviews()
+			}
+			catch(error)
+			{
 				this.$router.replace({name:"Search"})
-			})
+			}
 		},
 
-		fetchTags()
+		async fetchTags()
 		{
-			this.activity.types.forEach(element => {
-				this.$store.dispatch('fetchTag', {
-					id: element,
-				})
-				.then((tag) => {
-					this.tags.push(tag.data)
-				})
-			});
+			try
+			{
+				var response = await this.$store.dispatch('fetchActivityTags', {
+					id: this.activity.id,
+				});
+
+				this.tags = response.data.types;
+			}
+			catch(error)
+			{
+				console.log(error)
+			}
+		},
+
+		async fetchReviews()
+		{
+			try
+			{
+				var response = await this.$store.dispatch('fetchActivityRatings', {
+					id: this.activity.id,
+				});
+
+				this.reviews = response.data.ratings;
+
+				if(this.$store.getters.loggedIn)
+				{
+					this.reviews.forEach(element => {
+						if(element.creator == this.$store.state.user.id)
+							this.current_review = element;
+					});
+				}
+				
+			}
+			catch(error)
+			{
+				console.log(error)
+			}
 		},
 	}
 }
