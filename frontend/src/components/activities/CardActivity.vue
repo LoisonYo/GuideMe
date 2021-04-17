@@ -1,8 +1,7 @@
 <template>
 	<v-card elevation="0"
 	max-width="400px" 
-	color="primary lighten-2" 
-	class="ma-5" 
+	color="primary lighten-2"
 	:class="{'primary darken-1 text--darken-4': !$vuetify.theme.dark}">
 		<router-link :to="{ name: 'ActivityDetails', params: { id: activity.id }}" class="secondary--text d-flex justify-space-between">
 			<div style="margin: auto 0px;">

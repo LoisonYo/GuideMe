@@ -1,22 +1,29 @@
 <template>
 	<v-card elevation="0"
-	max-width="400px" 
+	max-width="400px"
 	color="primary lighten-2" 
-	class="ma-5 d-flex justify-space-between" 
 	:class="{'primary darken-1 text--darken-4': !$vuetify.theme.dark}">
 		<div>
-			<div>
-				<router-link :to="{ name: 'ActivityDetails', params: { id: activity.id }}" class="secondary--text">{{ activity.name }}</router-link>
-				<v-card-subtitle>{{activity.note}}</v-card-subtitle>
+			<CardActivity class="ma-0" :activity="activity"></CardActivity>
+
+			<div class="d-flex justify-space-around" style="padding: 10px 0px">
+				<v-btn @click="updateActivity" style="background-color: transparent; box-shadow: none;">Modifier</v-btn>
+				<v-btn @click="deleteActivity" style="background-color: transparent; box-shadow: none;">Supprimer</v-btn>
 			</div>
-			<v-btn @click="updateActivity">Modifier</v-btn>
-			<v-btn @click="deleteActivity">Supprimer</v-btn>
+			
 		</div>
 	</v-card>
 </template>
 
 <script>
+import CardActivity from '../../components/activities/CardActivity.vue';
+
 export default {
+	components:
+	{
+		CardActivity
+	},
+
 	name: "CardEditActivity",
 	props: {
 		activity: {
