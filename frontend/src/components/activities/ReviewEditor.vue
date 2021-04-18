@@ -20,7 +20,7 @@
 
                 <div v-if="updating" class="d-flex justify-space-between">
                     <v-btn @click="editReview" rounded color="accent" elevation="0">Modifier</v-btn>
-                    <v-btn @click="deleteReview" text rounded color="accent" elevation="0">Supprimer</v-btn>
+                    <v-btn @click="deleteReview" text rounded color="error" elevation="0">Supprimer</v-btn>
                 </div> 
 			</v-form>
         </div>
