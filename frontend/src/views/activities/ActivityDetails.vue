@@ -37,8 +37,7 @@
 				<ReviewEditor :activity_id="activity.id" :current_review="current_review" class="mb-15"></ReviewEditor>		
 
 				<ReviewActivity v-for="(review, index) in reviews" :key="index" :review="review"></ReviewActivity>
-				<ReviewActivity v-for="(review, index) in reviews" :key="index" :review="review"></ReviewActivity>
-
+				
 			</v-sheet>
 		</v-sheet>
 	</div>
