@@ -6,34 +6,40 @@
 			style="position: fixed; top: 0; left: 0; z-index: -1;"
 		/>
 
-		<v-sheet color="primary" class="pa-8 rounded-t-xl" style="margin-top: 280px; height: calc(100% - 280px);" >
-			<div class="d-flex justify-space-between align-end mb-5">
-				<h2 class="display-2 secondary--text">{{ activity.name }}</h2>
-				<div style="text-align: center;">
-					<h3 class="accent--text font-weight-medium" style="font-size: 2rem;">{{ activity.note }}</h3>
-					<p class="ma-n2 body-2 secondary--text text--darken-2">sur 10</p>
+		<v-sheet color="primary" class="pa-8 rounded-t-xl align-center" style="margin-top: 280px; height: calc(100% - 280px);" >
+			<v-sheet max-width="600px" class="mx-auto transparent">
+				<div class="d-flex justify-space-between align-end mb-5">
+					<h2 class="display-2 secondary--text">{{ activity.name }}</h2>
+					<div style="text-align: center;">
+						<h3 class="accent--text font-weight-medium" style="font-size: 2rem;">{{ activity.note }}</h3>
+						<p class="ma-n2 body-2 secondary--text text--darken-2">sur 10</p>
+					</div>
 				</div>
-			</div>
-			<p class="secondary--text" style="text-align: justify">{{ activity.description }}</p>
+				<p class="secondary--text" style="text-align: justify">{{ activity.description }}</p>
 
-			<div class="d-flex my-10">
-				<IconCategoryActivity v-for="(category, index) in tags" :key="index" :name="category.name" :icon="category.icon" class="mr-3"/>	
-			</div>
+				<div class="d-flex my-10">
+					<IconCategoryActivity v-for="(category, index) in tags" :key="index" :name="category.name" :icon="category.icon" class="mr-3"/>	
+				</div>
 
-			<div v-if="activity.website" style="width:100%; text-align: center;">
-				<a :href="activity.website">
-					<v-btn rounded color="accent" elevation="0">
-						<v-icon left>mdi-link-variant</v-icon>
-						Site officiel
-					</v-btn>
-				</a>
-			</div>
+				<div v-if="activity.website" style="width:100%; text-align: center;">
+					<a :href="activity.website">
+						<v-btn rounded color="accent" elevation="0">
+							<v-icon left>mdi-link-variant</v-icon>
+							Site officiel
+						</v-btn>
+					</a>
+				</div>
 
-			<PositionViewer v-model="activity" style="margin: 50px auto; max-width: 600px"></PositionViewer>
-			
-			<v-divider class="my-10 "></v-divider>
-			<ReviewEditor :activity_id="activity.id" :current_review="current_review"></ReviewEditor>		
-			<ReviewActivity v-for="(review, index) in reviews" :key="index" :review="review"></ReviewActivity>
+				<PositionField v-model="activity" :setPositionEnable="false" class="my-10"></PositionField>
+				
+				<v-divider class="my-10"></v-divider>
+
+				<ReviewEditor :activity_id="activity.id" :current_review="current_review" class="mb-15"></ReviewEditor>		
+
+				<ReviewActivity v-for="(review, index) in reviews" :key="index" :review="review"></ReviewActivity>
+				<ReviewActivity v-for="(review, index) in reviews" :key="index" :review="review"></ReviewActivity>
+
+			</v-sheet>
 		</v-sheet>
 	</div>
 </template>
@@ -42,14 +48,14 @@
 import IconCategoryActivity from '@/components/activities/IconCategoryActivity.vue'
 import ReviewActivity from '@/components/activities/ReviewActivity.vue'
 import ReviewEditor from '@/components/activities/ReviewEditor.vue'
-import PositionViewer from '@/components/activities/PositionViewer.vue'
+import PositionField from '@/components/activities/PositionField.vue'
 
 export default {
 	components: { 
 		IconCategoryActivity,
 		ReviewActivity,
 		ReviewEditor,
-		PositionViewer,
+		PositionField,
 	},
 	name: "ActivityDetails",
 	props: ['id'],

@@ -1,5 +1,5 @@
 <template>
-	<v-card v-if="canComment" class="d-flex justify-center transparent" style="margin-bottom: 30px; box-shadow: none">
+	<v-card v-if="canComment" elevation="0" class="d-flex justify-center transparent">
 
         <v-btn v-if="!display_form" @click="toggleForm" text rounded color="accent" class="subtitle-1">
             <v-icon v-text="icon" class="mr-3" color="rgb(107,119,180)"></v-icon>
@@ -12,16 +12,16 @@
                 <StarRating v-model="review.note" :max="10" style="width:400px;" class="mx-auto"></StarRating>
 
 				<v-textarea v-model="review.comment" label="Commentaire" required color="accent" auto-grow clearable></v-textarea>
+
                 <div v-if="!updating" class="d-flex justify-space-between">
-                    <v-btn @click="createReview" rounded color="accent" elevation="0" class="my-8">Envoyer</v-btn>
-                    <v-btn @click="toggleForm" text rounded color="accent" elevation="0" class="my-8">Annuler</v-btn>
+                    <v-btn @click="createReview" rounded color="accent" elevation="0">Envoyer</v-btn>
+                    <v-btn @click="toggleForm" text rounded color="accent" elevation="0">Annuler</v-btn>
                 </div>
 
                 <div v-if="updating" class="d-flex justify-space-between">
-                    <v-btn @click="editReview" rounded color="accent" elevation="0" class="my-8">Modifier</v-btn>
-                    <v-btn @click="deleteReview" text rounded color="accent" elevation="0" class="my-8">Supprimer</v-btn>
-                </div>
-                
+                    <v-btn @click="editReview" rounded color="accent" elevation="0">Modifier</v-btn>
+                    <v-btn @click="deleteReview" text rounded color="accent" elevation="0">Supprimer</v-btn>
+                </div> 
 			</v-form>
         </div>
 	</v-card>
