@@ -1,6 +1,6 @@
 <template>
-	<v-card @input="handleInput" class="d-flex justify-space-around" style="background-color: transparent; margin-bottom: 30px; box-shadow: none;">
-        <v-btn v-for="n in max" :key="n" @click="onClick(n)" @mouseover="onHover(n)" @mouseleave="onLeave" style="background-color: transparent; padding: none; box-shadow: none; min-width: 0px; width: 20px">
+	<v-card @input="handleInput" class="d-flex justify-space-around transparent" elevation="0">
+        <v-btn v-for="n in max" :key="n" @click="onClick(n)" @mouseover="onHover(n)" @mouseleave="onLeave" icon style="width:0">
             <v-icon v-if="isActive(n)" color="rgb(107,119,180)">{{ icon_unchecked }}</v-icon>
             <v-icon v-if="!isActive(n)" color="rgb(107,119,180)">{{ icon_checked }}</v-icon>
         </v-btn>
