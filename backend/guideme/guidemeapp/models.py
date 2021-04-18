@@ -59,11 +59,3 @@ class Rating(models.Model):
 
     class Meta:
         unique_together = ('creator', 'activity',)
-
-
-# Méthode permettant de supprimer automatique l'image d'une activité supprimée
-@receiver(models.signals.post_delete, sender= Activity)
-def auto_delete_image_on_delete(sender, instance, **kwargs):
-    if instance.image:
-        if os.path.isfile(instance.image.path):
-            os.remove(instance.image.path)
