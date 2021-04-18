@@ -1,12 +1,17 @@
 <template>
 	<div class="primary pt-15 pb-10 px-7" style="width: 100%; height: 100%;">
-		<h1>Résultats</h1>
+		<v-sheet max-width="600px" class="transparent mx-auto">
 
-		<div class="d-flex flex-column align-center" style="margin-top: 50px">
-			<div v-for="(value, index) in activities" :key="index" style="width: 100%;">
-				<card-edit-activity class="mx-auto my-4" :activity="value"></card-edit-activity>
+			<h2 class="display-1 secondary--text my-5">Mes activités</h2>
+			
+			<div class="d-flex flex-column align-center mt-5">
+				<div v-for="(value, index) in activities" :key="index" style="width: 100%;">
+					<card-edit-activity class="mx-auto my-5" :activity="value"></card-edit-activity>
+					<card-edit-activity class="mx-auto my-5" :activity="value"></card-edit-activity>
+					<card-edit-activity class="mx-auto my-5" :activity="value"></card-edit-activity>
+				</div>
 			</div>
-		</div>
+		</v-sheet>
 	</div>
 </template>
 
