@@ -1,10 +1,10 @@
 <template>
-	<v-card @input="handleInput" style="background-color: transparent; box-shadow: none">
-        <LMap @click="setPosition" :zoom="zoom" :center="origin" style="height: 300px; width: 100%;">
-            <LTileLayer :url="url" :attribution="attribution"/>
-            <LMarker :lat-lng.sync="center" :icon="icon" />
-        </LMap>
-	</v-card>
+    <LMap ref="map" @input="handleInput" @click="setPosition" 
+        :zoom="zoom" :center="origin" 
+        style="height: 300px; width: 100%; position:relative; z-index: 0;">
+        <LTileLayer :url="url" :attribution="attribution"/>
+        <LMarker :lat-lng.sync="center" :icon="icon" />
+    </LMap>
 </template>
 
 <script>
@@ -21,8 +21,17 @@ export default {
     },
 
 	name: "PositionField",
-    props: ['value'],
-
+    props: {
+        value: {
+            type: Object,
+            required: true,
+        },
+        setPositionEnable: {
+            type: Boolean,
+            default: true,
+        }
+    },
+    
     data()
     {
         return {
@@ -31,7 +40,7 @@ export default {
             attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             origin: undefined,
             center: undefined,
-            zoom: 0,
+            zoom: 10,
             icon: icon({
 				iconUrl: marker,
 				iconSize: [50, 50],
@@ -39,25 +48,25 @@ export default {
 			}),
         }
     },
+    mounted() {
+        this.$nextTick(() => {
+			this.map = this.$refs.map.mapObject // work as expected
+			this.map.zoomControl.remove()
+		});
 
-    mounted()
-    {
-        this.origin = latLng(0, 0);
+        this.origin = latLng(47, 6.9);
         this.center = this.origin;
     },
-
-    methods:
-    {
-        handleInput()
-        {
+    methods: {
+        handleInput() {
             this.$emit('input', this.content)
         },
-
-        setPosition(event)
-        {
-			this.center = event.latlng;
-            this.content.latitude = this.center.lat.toFixed(5);
-            this.content.longitude = this.center.lng.toFixed(5);
+        setPosition(event) {
+            if (this.setPositionEnable) {
+                this.center = event.latlng;
+                this.content.latitude = this.center.lat.toFixed(5);
+                this.content.longitude = this.center.lng.toFixed(5);
+            }
 		},
     },
 

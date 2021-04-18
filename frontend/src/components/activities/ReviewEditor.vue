@@ -1,27 +1,29 @@
 <template>
-	<v-card v-if="canComment" class="d-flex justify-space-around" style="background-color: transparent; margin-bottom: 30px; box-shadow: none">
-        <v-btn v-if="!display_form" @click="toggleForm" class="d-flex" style="background-color: transparent; box-shadow: none">
-            <v-icon v-text="icon" class="ml-3" color="rgb(107,119,180)"></v-icon>
-            <v-card-title>Écrire une review</v-card-title>
+	<v-card v-if="canComment" elevation="0" class="d-flex justify-center transparent">
+
+        <v-btn v-if="!display_form" @click="toggleForm" text rounded color="accent" class="subtitle-1">
+            <v-icon v-text="icon" class="mr-3" color="rgb(107,119,180)"></v-icon>
+            Écrire une review
         </v-btn>
 
-        <div v-if="display_form" style="width: 90%">
-            <v-form class="text-center">
-                <StarRating v-model="review.note" :max="10"></StarRating>
+        <div v-if="display_form" style="width:100%">
+            <h2 class="display-1 secondary--text mb-5">Review</h2>
+            <v-form class="text-center transparent" style="width:100%">
+                <StarRating v-model="review.note" :max="10" style="width:400px;" class="mx-auto"></StarRating>
 
-				<v-textarea v-model="review.comment" label="Review :" required color="accent" auto-grow clearable></v-textarea>
+				<v-textarea v-model="review.comment" label="Commentaire" required color="accent" auto-grow clearable></v-textarea>
+
                 <div v-if="!updating" class="d-flex justify-space-between">
-                    <v-btn @click="toggleForm" rounded color="accent" elevation="0" class="my-8">Annuler</v-btn>
-                    <v-btn @click="createReview" rounded color="accent" elevation="0" class="my-8">Envoyer</v-btn>
+                    <v-btn @click="createReview" rounded color="accent" elevation="0">Envoyer</v-btn>
+                    <v-btn @click="toggleForm" text rounded color="accent" elevation="0">Annuler</v-btn>
                 </div>
+
                 <div v-if="updating" class="d-flex justify-space-between">
-                    <v-btn @click="deleteReview" rounded color="accent" elevation="0" class="my-8">Supprimer</v-btn>
-                    <v-btn @click="editReview" rounded color="accent" elevation="0" class="my-8">Modifier</v-btn>
-                </div>
-                
+                    <v-btn @click="editReview" rounded color="accent" elevation="0">Modifier</v-btn>
+                    <v-btn @click="deleteReview" text rounded color="error" elevation="0">Supprimer</v-btn>
+                </div> 
 			</v-form>
         </div>
-        
 	</v-card>
 </template>
 
