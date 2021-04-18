@@ -6,6 +6,7 @@
 				<label id="hamburger-lbl" for="openmenu-input">
 					<span v-for="i in 3" :key="i" 
 					:style="{ background: colorNavIcon }"
+					class="secondary"
 					v-bind:class="[{ 'secondary': drawer }]"></span>
 				</label>
 			</v-app-bar-nav-icon>
@@ -51,7 +52,7 @@
 					<div v-if="user">
 						<h4 class="body-1 text-center">{{ user.username }}</h4>
 						<h5 class="caption text-center mb-3">{{ user.email }}</h5>
-						<v-btn @click="logout" block color="primary lighten-2" class="caption">
+						<v-btn @click="logout" block color="primary lighten-2" class="caption secondary--text">
 							Se déconnecter
 						</v-btn>
 					</div>
