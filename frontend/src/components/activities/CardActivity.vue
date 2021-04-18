@@ -1,25 +1,31 @@
 <template>
-	<v-card elevation="0"
-	max-width="400px" 
-	color="primary lighten-2"
-	:class="{'primary darken-1 text--darken-4': !$vuetify.theme.dark}">
-		<router-link :to="{ name: 'ActivityDetails', params: { id: activity.id }}" class="secondary--text d-flex justify-space-between">
-			<div style="margin: auto 0px;">
-				<v-card-title
-					class="headline"
+	<v-card elevation="0" 
+		height="100px"
+		class="rounded-lg"
+		color="primary lighten-2"
+		:class="{'primary darken-1 text--darken-4': !$vuetify.theme.dark}"
+		style="width:100%;">
+
+		<router-link :to="{ name: 'ActivityDetails', params: { id: activity.id }}" class="secondary--text d-flex justify-space-between" style="height:100%; width: 100%">
+			<div class="my-auto mx-3 text-truncate" style="width: 100%;" >
+				<v-card-title class="headlines"
+					style="width: 100%;"
 					v-text="activity.name">
 				</v-card-title>
-				<v-card-subtitle :style="color">{{activity.note}}</v-card-subtitle>
+
+				<v-card-subtitle class="title" 
+					:style="color"
+					v-text="activity.note">
+				</v-card-subtitle>
 			</div>
-			
+
 			<v-img
 				:src="activity.image"
-				class="ma-0"
-				style="object-fit: contain"
-				max-width="120px"
-				height="120px"
-			>
+				class="ma-0 rounded-r-lg"
+				max-width="150"
+				style="width: 150px;">
 			</v-img>
+
 		</router-link>
 	</v-card>
 </template>
