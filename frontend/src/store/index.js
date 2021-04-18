@@ -124,7 +124,7 @@ export default new Vuex.Store({
 		},
 
 		async createActivity(context, data)
-		{
+		{	
 			const formData = new FormData();
 			formData.append('creator', data.creator)
 			formData.append('name', data.name);
@@ -133,7 +133,10 @@ export default new Vuex.Store({
 			formData.append('longitude', data.longitude);
 			formData.append('latitude', data.latitude);
 			formData.append('website', data.website);
-			formData.append('types', data.tags);
+
+			data.tags.forEach(element => {
+				formData.append("types", element)
+			});
 
 			axios.defaults.headers.common["Authorization"] = "Bearer " + this.state.access_token;
 			var response = await axios.post('activities/', formData)
@@ -180,7 +183,10 @@ export default new Vuex.Store({
 			formData.append('longitude', data.longitude);
 			formData.append('latitude', data.latitude);
 			formData.append('website', data.website);
-			formData.append('types', data.tags);
+			
+			data.tags.forEach(element => {
+				formData.append("types", element)
+			});
 
 			return await axios.patch('activities/' + data.id + '/', formData)
 		},
