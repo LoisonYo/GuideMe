@@ -13,6 +13,7 @@ import os
 # Relations :
 #       Type n <------> n Activity
 class Type(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     icon = models.CharField(max_length=50, default='mdi-border-none-variant')
 
@@ -30,6 +31,7 @@ class Type(models.Model):
 #       Activity n <------> 1 User
 #       Activity 1 <------> n Rating
 class Activity(models.Model):
+    id = models.AutoField(primary_key=True)
     types = models.ManyToManyField(Type)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -50,6 +52,7 @@ class Activity(models.Model):
 #       Rating n <------> 1 Activity
 #       Rating n <------> 1 User
 class Rating(models.Model):
+    id = models.AutoField(primary_key=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
     activity = models.ForeignKey(Activity, related_name='ratings', on_delete=models.CASCADE, default=None)
 
@@ -59,11 +62,3 @@ class Rating(models.Model):
 
     class Meta:
         unique_together = ('creator', 'activity',)
-
-
-# Méthode permettant de supprimer automatique l'image d'une activité supprimée
-@receiver(models.signals.post_delete, sender= Activity)
-def auto_delete_image_on_delete(sender, instance, **kwargs):
-    if instance.image:
-        if os.path.isfile(instance.image.path):
-            os.remove(instance.image.path)

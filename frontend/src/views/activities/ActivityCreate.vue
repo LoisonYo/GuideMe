@@ -122,6 +122,7 @@ export default {
 		{
 			try
 			{
+				console.log(this.activity.tags)
 				var response = await this.$store.dispatch("createActivity", {
 					creator: this.$store.state.user.id,
 					name: this.activity.name,
