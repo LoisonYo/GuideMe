@@ -3,11 +3,9 @@
 		<v-sheet max-width="600px" class="transparent mx-auto">
 
 			<h2 class="display-1 secondary--text my-5">Mes activités</h2>
-			
+
 			<div class="d-flex flex-column align-center mt-5">
 				<div v-for="(value, index) in activities" :key="index" style="width: 100%;">
-					<card-edit-activity class="mx-auto my-5" :activity="value"></card-edit-activity>
-					<card-edit-activity class="mx-auto my-5" :activity="value"></card-edit-activity>
 					<card-edit-activity class="mx-auto my-5" :activity="value"></card-edit-activity>
 				</div>
 			</div>
