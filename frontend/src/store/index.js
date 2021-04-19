@@ -4,7 +4,7 @@ import axios from 'axios';
 import config from './../../.env.json';
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "http://localhost:8000/api/";
+axios.defaults.baseURL = config.backend_address;
 
 export default new Vuex.Store({
 	state:
